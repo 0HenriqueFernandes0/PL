@@ -1,0 +1,92 @@
+doctype html
+html(lang="en")
+  head
+    title My Complex Page
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="styles.css")
+    script(src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js")
+  body
+    header
+      h1 My Complex Page
+      nav
+        ul
+          li
+            a(href="#") Home
+          li
+            a(href="#") About
+          li
+            a(href="#") Services
+          li
+            a(href="#") Contact Us
+    main
+      section#about
+        h2 About Us
+        p We are a team of experienced web developers and designers who specialize in creating beautiful, responsive websites and web applications.
+        p Our services include custom web design, front-end development, back-end development, and web hosting.
+        ul
+          li We have over 10 years of experience in the web development industry.
+          li We use the latest technologies and best practices to deliver high-quality, scalable solutions.
+          li We work closely with our clients to ensure that their needs are met and their expectations are exceeded.
+      section#services
+        h2 Our Services
+        p We offer a wide range of web development and design services, including:
+        ul
+          li Custom web design and development
+          li Front-end development using HTML, CSS, and JavaScript
+          li Back-end development using Node.js and MongoDB
+          li Web hosting and maintenance
+        p Contact us today to learn more about our services and how we can help you achieve your online goals.
+      section#portfolio
+        h2 Our Portfolio
+        p Check out some of our recent projects:
+        ul
+          li
+            a(href="#") Project 1
+            p A custom e-commerce website for a local business.
+          li
+            a(href="#") Project 2
+            p A responsive blog site for a fashion blogger.
+          li
+            a(href="#") Project 3
+            p An interactive web application for a healthcare provider.
+      section#contact
+        h2 Contact Us
+        p Fill out the form below to get in touch with us:
+        form(action="/submit-form" method="post")
+          label(for="name") Name:
+          input(type="text" name="name" required)
+          label(for="email") Email:
+          input(type="email" name="email" required)
+          label(for="message") Message:
+          textarea(name="message" required)
+          button(type="submit") Submit
+      section#newsletter
+        h2 Newsletter
+        p Sign up for our newsletter to stay up-to-date on the latest web development trends and technologies.
+        form(action="/subscribe" method="post")
+          label(for="email") Email:
+          input(type="email" name="email" required)
+          button(type="submit") Subscribe
+    footer
+      p Copyright © 2023
+      p Made with ❤️ by My Complex Page
+      script.
+        new Vue({
+          el: '#newsletter',
+          data: {
+            subscribed: false
+          },
+          methods: {
+            subscribe() {
+              axios.post('/subscribe', { email: this.$el.querySelector('input[name="email"]').value })
+                .then(response => {
+                  this.subscribed = true
+                })
+                .catch(error => {
+                  console.error(error)
+                })
+            }
+          }
+        })

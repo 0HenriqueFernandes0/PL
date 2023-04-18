@@ -3,16 +3,24 @@ import ply.lex as lex
 tokens = (
     'IDENTACAO',
     'NEWLINE',
-    'TAG',
-    'ATRIBUTOS',
-    'QUANT'
+    'WORD',
+    'LPAREN',
+    'RPAREN',
+    'EQUAL',
+    'ASPAS',
+    'ID',
+    'CLASS'
 )
 
 t_IDENTACAO = r'\t'
 t_NEWLINE = r'\n'
-t_TAG = r'\w+'
-t_ATRIBUTOS = r'\(\w+\)'
-t_QUANT = r'\d+;'
+t_WORD = r'(\w|\!|\?|\/|\-|\+|\:|;|,)+'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+t_EQUAL = r'='
+t_ASPAS = r'(\"|\')'
+t_ID = r'\#'
+t_CLASS = r'\.'
 
 t_ignore = ' '
 
@@ -21,7 +29,8 @@ def t_error(t):
     t.lexer.skip(1)
 
 lexer = lex.lex()
-data = open("example.txt",'r')
+
+data = open("example1.txt",'r')
 lexer.input(data.read())
 while s := lexer.token():
    print(s)
