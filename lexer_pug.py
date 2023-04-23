@@ -1,7 +1,8 @@
 import ply.lex as lex
 
 tokens = (
-    'IDENTACAO',
+    'TAB',
+    'SPACE',
     'NEWLINE',
     'WORD',
     'LPAREN',
@@ -12,7 +13,8 @@ tokens = (
     'CLASS'
 )
 
-t_IDENTACAO = r'\t'
+t_TAB = r'\t'
+t_SPACE=r'\ '
 t_NEWLINE = r'\n'
 t_WORD = r'(\w|\!|\?|\/|\-|\+|\:|;|,)+'
 t_LPAREN = r'\('
@@ -22,7 +24,7 @@ t_ASPAS = r'(\"|\')'
 t_ID = r'\#'
 t_CLASS = r'\.'
 
-t_ignore = ' '
+t_ignore = ''
 
 def t_error(t):
     print(f"Carácter ilegal {t.value[0]}")
@@ -30,7 +32,7 @@ def t_error(t):
 
 lexer = lex.lex()
 
-data = open("example1.txt",'r')
+data = open("example.txt",'r',encoding="utf8")
 lexer.input(data.read())
 while s := lexer.token():
    print(s)
