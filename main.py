@@ -7,4 +7,4 @@ lexer.input(data)
 while s := lexer.token():
    print(s)
 
-rec_Parser(data)
+#rec_Parser(data)
