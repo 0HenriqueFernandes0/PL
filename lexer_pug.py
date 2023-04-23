@@ -31,8 +31,3 @@ def t_error(t):
     t.lexer.skip(1)
 
 lexer = lex.lex()
-
-data = open("example.txt",'r',encoding="utf8")
-lexer.input(data.read())
-while s := lexer.token():
-   print(s)
