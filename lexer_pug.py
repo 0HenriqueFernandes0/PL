@@ -11,14 +11,14 @@ tokens = (
     'TAB',
     'SPACE',
     'NEWLINE',
-    'TEXTO',
     'TAG',
     'LPAREN',
     'RPAREN',
     'EQUAL',
     'ATRIBUT',
     'ID',
-    'CLASS'
+    'CLASS',
+    'TEXTO'
 )
 
 def t_indentacao_TAG(t):
