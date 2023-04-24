@@ -1,10 +1,11 @@
 from lexer_pug import lexer
-from parser_pug import rec_Parser
+from yac_pug import parser
 
-data = open("example.txt",'r',encoding="utf8").read()
+data = open("example0.txt",'r',encoding="utf8").read()
 
 lexer.input(data)
 while s := lexer.token():
    print(s)
 
-#rec_Parser(data)
+print("\n\n\n")
+print(parser.parse(data))

@@ -1,0 +1,329 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> linha
+Rule 1     linha -> identacao corpo NEWLINE
+Rule 2     identacao -> TAB identacao
+Rule 3     identacao -> SPACE identacao
+Rule 4     identacao -> <empty>
+Rule 5     corpo -> tag
+Rule 6     corpo -> tag SPACE TEXTO
+Rule 7     corpo -> tag EQUAL SPACE TEXTO
+Rule 8     tag -> TAG
+Rule 9     tag -> ID
+Rule 10    tag -> ID tag
+Rule 11    tag -> CLASS
+Rule 12    tag -> CLASS tag
+Rule 13    tag -> tag LPAREN atributos RPAREN
+Rule 14    atributos -> ATRIBUT
+Rule 15    atributos -> ATRIBUT atributos
+
+Terminals, with rules where they appear
+
+ATRIBUT              : 14 15
+CLASS                : 11 12
+EQUAL                : 7
+ID                   : 9 10
+LPAREN               : 13
+NEWLINE              : 1
+RPAREN               : 13
+SPACE                : 3 6 7
+TAB                  : 2
+TAG                  : 8
+TEXTO                : 6 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+atributos            : 13 15
+corpo                : 1
+identacao            : 1 2 3
+linha                : 0
+tag                  : 5 6 7 10 12 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . linha
+    (1) linha -> . identacao corpo NEWLINE
+    (2) identacao -> . TAB identacao
+    (3) identacao -> . SPACE identacao
+    (4) identacao -> .
+
+    TAB             shift and go to state 3
+    SPACE           shift and go to state 4
+    TAG             reduce using rule 4 (identacao -> .)
+    ID              reduce using rule 4 (identacao -> .)
+    CLASS           reduce using rule 4 (identacao -> .)
+
+    linha                          shift and go to state 1
+    identacao                      shift and go to state 2
+
+state 1
+
+    (0) S' -> linha .
+
+
+
+state 2
+
+    (1) linha -> identacao . corpo NEWLINE
+    (5) corpo -> . tag
+    (6) corpo -> . tag SPACE TEXTO
+    (7) corpo -> . tag EQUAL SPACE TEXTO
+    (8) tag -> . TAG
+    (9) tag -> . ID
+    (10) tag -> . ID tag
+    (11) tag -> . CLASS
+    (12) tag -> . CLASS tag
+    (13) tag -> . tag LPAREN atributos RPAREN
+
+    TAG             shift and go to state 7
+    ID              shift and go to state 8
+    CLASS           shift and go to state 9
+
+    corpo                          shift and go to state 5
+    tag                            shift and go to state 6
+
+state 3
+
+    (2) identacao -> TAB . identacao
+    (2) identacao -> . TAB identacao
+    (3) identacao -> . SPACE identacao
+    (4) identacao -> .
+
+    TAB             shift and go to state 3
+    SPACE           shift and go to state 4
+    TAG             reduce using rule 4 (identacao -> .)
+    ID              reduce using rule 4 (identacao -> .)
+    CLASS           reduce using rule 4 (identacao -> .)
+
+    identacao                      shift and go to state 10
+
+state 4
+
+    (3) identacao -> SPACE . identacao
+    (2) identacao -> . TAB identacao
+    (3) identacao -> . SPACE identacao
+    (4) identacao -> .
+
+    TAB             shift and go to state 3
+    SPACE           shift and go to state 4
+    TAG             reduce using rule 4 (identacao -> .)
+    ID              reduce using rule 4 (identacao -> .)
+    CLASS           reduce using rule 4 (identacao -> .)
+
+    identacao                      shift and go to state 11
+
+state 5
+
+    (1) linha -> identacao corpo . NEWLINE
+
+    NEWLINE         shift and go to state 12
+
+
+state 6
+
+    (5) corpo -> tag .
+    (6) corpo -> tag . SPACE TEXTO
+    (7) corpo -> tag . EQUAL SPACE TEXTO
+    (13) tag -> tag . LPAREN atributos RPAREN
+
+    NEWLINE         reduce using rule 5 (corpo -> tag .)
+    SPACE           shift and go to state 13
+    EQUAL           shift and go to state 14
+    LPAREN          shift and go to state 15
+
+
+state 7
+
+    (8) tag -> TAG .
+
+    SPACE           reduce using rule 8 (tag -> TAG .)
+    EQUAL           reduce using rule 8 (tag -> TAG .)
+    LPAREN          reduce using rule 8 (tag -> TAG .)
+    NEWLINE         reduce using rule 8 (tag -> TAG .)
+
+
+state 8
+
+    (9) tag -> ID .
+    (10) tag -> ID . tag
+    (8) tag -> . TAG
+    (9) tag -> . ID
+    (10) tag -> . ID tag
+    (11) tag -> . CLASS
+    (12) tag -> . CLASS tag
+    (13) tag -> . tag LPAREN atributos RPAREN
+
+    SPACE           reduce using rule 9 (tag -> ID .)
+    EQUAL           reduce using rule 9 (tag -> ID .)
+    LPAREN          reduce using rule 9 (tag -> ID .)
+    NEWLINE         reduce using rule 9 (tag -> ID .)
+    TAG             shift and go to state 7
+    ID              shift and go to state 8
+    CLASS           shift and go to state 9
+
+    tag                            shift and go to state 16
+
+state 9
+
+    (11) tag -> CLASS .
+    (12) tag -> CLASS . tag
+    (8) tag -> . TAG
+    (9) tag -> . ID
+    (10) tag -> . ID tag
+    (11) tag -> . CLASS
+    (12) tag -> . CLASS tag
+    (13) tag -> . tag LPAREN atributos RPAREN
+
+    SPACE           reduce using rule 11 (tag -> CLASS .)
+    EQUAL           reduce using rule 11 (tag -> CLASS .)
+    LPAREN          reduce using rule 11 (tag -> CLASS .)
+    NEWLINE         reduce using rule 11 (tag -> CLASS .)
+    TAG             shift and go to state 7
+    ID              shift and go to state 8
+    CLASS           shift and go to state 9
+
+    tag                            shift and go to state 17
+
+state 10
+
+    (2) identacao -> TAB identacao .
+
+    TAG             reduce using rule 2 (identacao -> TAB identacao .)
+    ID              reduce using rule 2 (identacao -> TAB identacao .)
+    CLASS           reduce using rule 2 (identacao -> TAB identacao .)
+
+
+state 11
+
+    (3) identacao -> SPACE identacao .
+
+    TAG             reduce using rule 3 (identacao -> SPACE identacao .)
+    ID              reduce using rule 3 (identacao -> SPACE identacao .)
+    CLASS           reduce using rule 3 (identacao -> SPACE identacao .)
+
+
+state 12
+
+    (1) linha -> identacao corpo NEWLINE .
+
+    $end            reduce using rule 1 (linha -> identacao corpo NEWLINE .)
+
+
+state 13
+
+    (6) corpo -> tag SPACE . TEXTO
+
+    TEXTO           shift and go to state 18
+
+
+state 14
+
+    (7) corpo -> tag EQUAL . SPACE TEXTO
+
+    SPACE           shift and go to state 19
+
+
+state 15
+
+    (13) tag -> tag LPAREN . atributos RPAREN
+    (14) atributos -> . ATRIBUT
+    (15) atributos -> . ATRIBUT atributos
+
+    ATRIBUT         shift and go to state 21
+
+    atributos                      shift and go to state 20
+
+state 16
+
+    (10) tag -> ID tag .
+    (13) tag -> tag . LPAREN atributos RPAREN
+
+  ! shift/reduce conflict for LPAREN resolved as shift
+    SPACE           reduce using rule 10 (tag -> ID tag .)
+    EQUAL           reduce using rule 10 (tag -> ID tag .)
+    NEWLINE         reduce using rule 10 (tag -> ID tag .)
+    LPAREN          shift and go to state 15
+
+  ! LPAREN          [ reduce using rule 10 (tag -> ID tag .) ]
+
+
+state 17
+
+    (12) tag -> CLASS tag .
+    (13) tag -> tag . LPAREN atributos RPAREN
+
+  ! shift/reduce conflict for LPAREN resolved as shift
+    SPACE           reduce using rule 12 (tag -> CLASS tag .)
+    EQUAL           reduce using rule 12 (tag -> CLASS tag .)
+    NEWLINE         reduce using rule 12 (tag -> CLASS tag .)
+    LPAREN          shift and go to state 15
+
+  ! LPAREN          [ reduce using rule 12 (tag -> CLASS tag .) ]
+
+
+state 18
+
+    (6) corpo -> tag SPACE TEXTO .
+
+    NEWLINE         reduce using rule 6 (corpo -> tag SPACE TEXTO .)
+
+
+state 19
+
+    (7) corpo -> tag EQUAL SPACE . TEXTO
+
+    TEXTO           shift and go to state 22
+
+
+state 20
+
+    (13) tag -> tag LPAREN atributos . RPAREN
+
+    RPAREN          shift and go to state 23
+
+
+state 21
+
+    (14) atributos -> ATRIBUT .
+    (15) atributos -> ATRIBUT . atributos
+    (14) atributos -> . ATRIBUT
+    (15) atributos -> . ATRIBUT atributos
+
+    RPAREN          reduce using rule 14 (atributos -> ATRIBUT .)
+    ATRIBUT         shift and go to state 21
+
+    atributos                      shift and go to state 24
+
+state 22
+
+    (7) corpo -> tag EQUAL SPACE TEXTO .
+
+    NEWLINE         reduce using rule 7 (corpo -> tag EQUAL SPACE TEXTO .)
+
+
+state 23
+
+    (13) tag -> tag LPAREN atributos RPAREN .
+
+    SPACE           reduce using rule 13 (tag -> tag LPAREN atributos RPAREN .)
+    EQUAL           reduce using rule 13 (tag -> tag LPAREN atributos RPAREN .)
+    LPAREN          reduce using rule 13 (tag -> tag LPAREN atributos RPAREN .)
+    NEWLINE         reduce using rule 13 (tag -> tag LPAREN atributos RPAREN .)
+
+
+state 24
+
+    (15) atributos -> ATRIBUT atributos .
+
+    RPAREN          reduce using rule 15 (atributos -> ATRIBUT atributos .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for LPAREN in state 16 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 17 resolved as shift

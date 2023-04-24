@@ -2,9 +2,9 @@ import ply.lex as lex
 
 states = (
     ('indentacao', 'exclusive'),
-    ('atributos', 'inclusive'),
-    ('tag', 'inclusive'),
-    ('frase', 'inclusive')
+    ('atributos', 'exclusive'),
+    ('tag', 'exclusive'),
+    ('frase', 'exclusive')
 )
 
 tokens = (
@@ -16,7 +16,7 @@ tokens = (
     'LPAREN',
     'RPAREN',
     'EQUAL',
-    'ASPAS',
+    'ATRIBUT',
     'ID',
     'CLASS'
 )
@@ -77,6 +77,14 @@ def t_tag_ID(t):
     r'\#\w+'
     return t
 
+def t_tag_EQUAL(t):
+    r'='
+    return t
+
+def t_tag_error(t):
+    print(f"Carácter ilegal {t.value[0]} na linha {t.lineno}")
+    t.lexer.skip(1)
+
 
 
 def t_atributos_RPAREN(t):
@@ -84,16 +92,14 @@ def t_atributos_RPAREN(t):
     t.lexer.begin('frase')
     return t
 
-def t_atributos_EQUAL(t):
-    r'='
+def t_atributos_ATRIBUT(t):
+    r'\w+=("[^"]+"|\'[^\']+\')'
     return t
 
-def t_atributos_ASPAS(t):
-    r'(\"|\')'
-    return t
-
-def t_tag_error(t):
+def t_atributos_error(t):
+    print(f"Carácter ilegal {t.value[0]} na linha {t.lineno}")
     t.lexer.skip(1)
+
 
 
 
