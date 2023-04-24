@@ -8,7 +8,7 @@ states = (
 )
 
 tokens = (
-    'TAB',
+    'IDENTACAO',
     'SPACE',
     'NEWLINE',
     'TAG',
@@ -36,12 +36,8 @@ def t_indentacao_ID(t):
     t.lexer.begin('tag')
     return t
 
-def t_indentacao_TAB(t):
-    r'\t+'
-    return t
-
-def t_indentacao_SPACE(t):
-    r'(\ )+'
+def t_indentacao_IDENTACAO(t):
+    r'(\t|\ )+'
     return t
 
 def t_indentacao_error(t):

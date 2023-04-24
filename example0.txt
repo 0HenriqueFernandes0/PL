@@ -1,8 +1,8 @@
 html
-    head
+	head.col.lin
         title= pageTitle
         script(type='text/javascript')
-    body
+	body
         h1 Pug - node template engine
         #container.col
             if youAreUsingPug
