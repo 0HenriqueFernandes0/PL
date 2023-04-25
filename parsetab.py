@@ -6,7 +6,7 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ATRIBUT CLASS EQUAL ID IDENTACAO LPAREN NEWLINE RPAREN SPACE TAG TEXTOhtml :   linhas\n                | \n    linhas : linhas NEWLINE linha\n                | linha\n    linha :  IDENTACAO corpo\n                | corpo\n    corpo :  tag\n                | tag SPACE TEXTO\n                | tag EQUAL SPACE TEXTO\n    tag :    TAG\n                | CLASS \n                | ID\n                | TAG tag\n                | CLASS tag\n                | ID tag\n                | tag LPAREN atributos RPAREN\n    atributos :   ATRIBUT\n                    | ATRIBUT atributos\n    '
+_lr_signature = 'ATRIBUT CLASS EQUAL ID IDENTACAO LPAREN NEWLINE RPAREN SPACE TAG TEXTO TEXTPLAINhtml :   linhas\n                | \n    linhas : linhas NEWLINE linha\n                | linha\n    linha :  IDENTACAO corpo\n                | corpo\n    corpo :  tag\n                | tag SPACE TEXTO\n                | tag EQUAL SPACE TEXTO\n    tag :    TAG\n                | CLASS \n                | ID\n                | TAG tag\n                | CLASS tag\n                | ID tag\n                | tag LPAREN atributos RPAREN\n    atributos :   ATRIBUT\n                    | ATRIBUT atributos\n    '
     
 _lr_action_items = {'$end':([0,1,2,3,5,6,7,8,9,11,15,16,17,18,19,23,24,],[-2,0,-1,-4,-6,-7,-10,-11,-12,-5,-13,-14,-15,-3,-8,-9,-16,]),'IDENTACAO':([0,10,],[4,4,]),'TAG':([0,4,7,8,9,10,],[7,7,7,7,7,7,]),'CLASS':([0,4,7,8,9,10,],[8,8,8,8,8,8,]),'ID':([0,4,7,8,9,10,],[9,9,9,9,9,9,]),'NEWLINE':([2,3,5,6,7,8,9,11,15,16,17,18,19,23,24,],[10,-4,-6,-7,-10,-11,-12,-5,-13,-14,-15,-3,-8,-9,-16,]),'SPACE':([6,7,8,9,13,15,16,17,24,],[12,-10,-11,-12,20,-13,-14,-15,-16,]),'EQUAL':([6,7,8,9,15,16,17,24,],[13,-10,-11,-12,-13,-14,-15,-16,]),'LPAREN':([6,7,8,9,15,16,17,24,],[14,-10,-11,-12,14,14,14,-16,]),'TEXTO':([12,20,],[19,23,]),'ATRIBUT':([14,22,],[22,22,]),'RPAREN':([21,22,25,],[24,-17,-18,]),}
 
@@ -29,20 +29,20 @@ _lr_productions = [
   ("S' -> html","S'",1,None,None,None),
   ('html -> linhas','html',1,'p_html','yac_pug.py',6),
   ('html -> <empty>','html',0,'p_html','yac_pug.py',7),
-  ('linhas -> linhas NEWLINE linha','linhas',3,'p_linhas','yac_pug.py',16),
-  ('linhas -> linha','linhas',1,'p_linhas','yac_pug.py',17),
-  ('linha -> IDENTACAO corpo','linha',2,'p_linha','yac_pug.py',37),
-  ('linha -> corpo','linha',1,'p_linha','yac_pug.py',38),
-  ('corpo -> tag','corpo',1,'p_corpo','yac_pug.py',54),
-  ('corpo -> tag SPACE TEXTO','corpo',3,'p_corpo','yac_pug.py',55),
-  ('corpo -> tag EQUAL SPACE TEXTO','corpo',4,'p_corpo','yac_pug.py',56),
-  ('tag -> TAG','tag',1,'p_tag','yac_pug.py',66),
-  ('tag -> CLASS','tag',1,'p_tag','yac_pug.py',67),
-  ('tag -> ID','tag',1,'p_tag','yac_pug.py',68),
-  ('tag -> TAG tag','tag',2,'p_tag','yac_pug.py',69),
-  ('tag -> CLASS tag','tag',2,'p_tag','yac_pug.py',70),
-  ('tag -> ID tag','tag',2,'p_tag','yac_pug.py',71),
-  ('tag -> tag LPAREN atributos RPAREN','tag',4,'p_tag','yac_pug.py',72),
-  ('atributos -> ATRIBUT','atributos',1,'p_atributos','yac_pug.py',92),
-  ('atributos -> ATRIBUT atributos','atributos',2,'p_atributos','yac_pug.py',93),
+  ('linhas -> linhas NEWLINE linha','linhas',3,'p_linhas','yac_pug.py',15),
+  ('linhas -> linha','linhas',1,'p_linhas','yac_pug.py',16),
+  ('linha -> IDENTACAO corpo','linha',2,'p_linha','yac_pug.py',35),
+  ('linha -> corpo','linha',1,'p_linha','yac_pug.py',36),
+  ('corpo -> tag','corpo',1,'p_corpo','yac_pug.py',52),
+  ('corpo -> tag SPACE TEXTO','corpo',3,'p_corpo','yac_pug.py',53),
+  ('corpo -> tag EQUAL SPACE TEXTO','corpo',4,'p_corpo','yac_pug.py',54),
+  ('tag -> TAG','tag',1,'p_tag','yac_pug.py',64),
+  ('tag -> CLASS','tag',1,'p_tag','yac_pug.py',65),
+  ('tag -> ID','tag',1,'p_tag','yac_pug.py',66),
+  ('tag -> TAG tag','tag',2,'p_tag','yac_pug.py',67),
+  ('tag -> CLASS tag','tag',2,'p_tag','yac_pug.py',68),
+  ('tag -> ID tag','tag',2,'p_tag','yac_pug.py',69),
+  ('tag -> tag LPAREN atributos RPAREN','tag',4,'p_tag','yac_pug.py',70),
+  ('atributos -> ATRIBUT','atributos',1,'p_atributos','yac_pug.py',90),
+  ('atributos -> ATRIBUT atributos','atributos',2,'p_atributos','yac_pug.py',91),
 ]

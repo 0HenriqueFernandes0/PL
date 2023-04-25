@@ -2,7 +2,7 @@ html(lang="en")
 	head
         title= pageTitle
         script(type='text/javascript').
-        if (foo) bar(1 + 5)
+            if (foo) bar(1 + 5)
 	body
         h1 Pug - node template engine
         #container.col

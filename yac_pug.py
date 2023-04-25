@@ -1,5 +1,5 @@
 import ply.yacc as yac
-from lexer_pug import tokens
+from lexer.lexer_pug import tokens
 from blocks import Block
 
 def p_html(p):

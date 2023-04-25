@@ -1,7 +1,7 @@
-from lexer_pug import lexer
+from lexer.lexer_pug import lexer
 from yac_pug import parser
 
-data = open("example0.txt",'r',encoding="utf8").read()
+data = open("tests/example.txt",'r',encoding="utf8").read()
 
 #lexer.input(data)
 #while s := lexer.token():
