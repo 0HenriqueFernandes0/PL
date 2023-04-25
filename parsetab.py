@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ATRIBUT CLASS EQUAL ID IDENTACAO LPAREN NEWLINE RPAREN SPACE TAG TEXTOlinhas : linha\n                | linha linhas\n                | \n    linha :  IDENTACAO corpo NEWLINE\n                | corpo NEWLINE\n    corpo :  tag\n                | tag SPACE TEXTO\n                | tag EQUAL SPACE TEXTO\n    tag :    TAG\n                | TAG tag\n                | ID\n                | ID tag\n                | CLASS\n                | CLASS tag\n                | tag LPAREN atributos RPAREN\n    atributos :   ATRIBUT atributos\n                    |\n    '
+_lr_signature = 'ATRIBUT CLASS EQUAL ID IDENTACAO LPAREN NEWLINE RPAREN SPACE TAG TEXTOhtml :   linhas\n                | \n    linhas : linha\n                | linha linhas\n    linha :  IDENTACAO corpo NEWLINE\n                | corpo NEWLINE\n    corpo :  tag\n                | tag SPACE TEXTO\n                | tag EQUAL SPACE TEXTO\n    tag :    TAG\n                | CLASS \n                | ID\n                | TAG tag\n                | CLASS tag\n                | ID tag\n                | tag LPAREN atributos RPAREN\n    atributos :   ATRIBUT\n                    | ATRIBUT atributos\n    '
     
-_lr_action_items = {'$end':([0,1,2,9,11,18,],[-3,0,-1,-2,-5,-4,]),'IDENTACAO':([0,2,11,18,],[3,3,-5,-4,]),'TAG':([0,2,3,6,7,8,11,18,],[6,6,6,6,6,6,-5,-4,]),'ID':([0,2,3,6,7,8,11,18,],[7,7,7,7,7,7,-5,-4,]),'CLASS':([0,2,3,6,7,8,11,18,],[8,8,8,8,8,8,-5,-4,]),'NEWLINE':([4,5,6,7,8,10,15,16,17,19,23,24,],[11,-6,-9,-11,-13,18,-10,-12,-14,-7,-8,-15,]),'SPACE':([5,6,7,8,13,15,16,17,24,],[12,-9,-11,-13,20,-10,-12,-14,-15,]),'EQUAL':([5,6,7,8,15,16,17,24,],[13,-9,-11,-13,-10,-12,-14,-15,]),'LPAREN':([5,6,7,8,15,16,17,24,],[14,-9,-11,-13,14,14,14,-15,]),'TEXTO':([12,20,],[19,23,]),'ATRIBUT':([14,22,],[22,22,]),'RPAREN':([14,21,22,25,],[-17,24,-17,-16,]),}
+_lr_action_items = {'$end':([0,1,2,3,10,12,19,],[-2,0,-1,-3,-4,-6,-5,]),'IDENTACAO':([0,3,12,19,],[4,4,-6,-5,]),'TAG':([0,3,4,7,8,9,12,19,],[7,7,7,7,7,7,-6,-5,]),'CLASS':([0,3,4,7,8,9,12,19,],[8,8,8,8,8,8,-6,-5,]),'ID':([0,3,4,7,8,9,12,19,],[9,9,9,9,9,9,-6,-5,]),'NEWLINE':([5,6,7,8,9,11,16,17,18,20,24,25,],[12,-7,-10,-11,-12,19,-13,-14,-15,-8,-9,-16,]),'SPACE':([6,7,8,9,14,16,17,18,25,],[13,-10,-11,-12,21,-13,-14,-15,-16,]),'EQUAL':([6,7,8,9,16,17,18,25,],[14,-10,-11,-12,-13,-14,-15,-16,]),'LPAREN':([6,7,8,9,16,17,18,25,],[15,-10,-11,-12,15,15,15,-16,]),'TEXTO':([13,21,],[20,24,]),'ATRIBUT':([15,23,],[23,23,]),'RPAREN':([22,23,26,],[25,-17,-18,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'linhas':([0,2,],[1,9,]),'linha':([0,2,],[2,2,]),'corpo':([0,2,3,],[4,4,10,]),'tag':([0,2,3,6,7,8,],[5,5,5,15,16,17,]),'atributos':([14,22,],[21,25,]),}
+_lr_goto_items = {'html':([0,],[1,]),'linhas':([0,3,],[2,10,]),'linha':([0,3,],[3,3,]),'corpo':([0,3,4,],[5,5,11,]),'tag':([0,3,4,7,8,9,],[6,6,6,16,17,18,]),'atributos':([15,23,],[22,26,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,22 +26,23 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> linhas","S'",1,None,None,None),
-  ('linhas -> linha','linhas',1,'p_linhas','yac_pug.py',5),
-  ('linhas -> linha linhas','linhas',2,'p_linhas','yac_pug.py',6),
-  ('linhas -> <empty>','linhas',0,'p_linhas','yac_pug.py',7),
-  ('linha -> IDENTACAO corpo NEWLINE','linha',3,'p_linha','yac_pug.py',11),
-  ('linha -> corpo NEWLINE','linha',2,'p_linha','yac_pug.py',12),
-  ('corpo -> tag','corpo',1,'p_corpo','yac_pug.py',21),
-  ('corpo -> tag SPACE TEXTO','corpo',3,'p_corpo','yac_pug.py',22),
-  ('corpo -> tag EQUAL SPACE TEXTO','corpo',4,'p_corpo','yac_pug.py',23),
-  ('tag -> TAG','tag',1,'p_tag','yac_pug.py',33),
-  ('tag -> TAG tag','tag',2,'p_tag','yac_pug.py',34),
-  ('tag -> ID','tag',1,'p_tag','yac_pug.py',35),
-  ('tag -> ID tag','tag',2,'p_tag','yac_pug.py',36),
-  ('tag -> CLASS','tag',1,'p_tag','yac_pug.py',37),
-  ('tag -> CLASS tag','tag',2,'p_tag','yac_pug.py',38),
-  ('tag -> tag LPAREN atributos RPAREN','tag',4,'p_tag','yac_pug.py',39),
-  ('atributos -> ATRIBUT atributos','atributos',2,'p_atributos','yac_pug.py',59),
-  ('atributos -> <empty>','atributos',0,'p_atributos','yac_pug.py',60),
+  ("S' -> html","S'",1,None,None,None),
+  ('html -> linhas','html',1,'p_html','yac_pug.py',6),
+  ('html -> <empty>','html',0,'p_html','yac_pug.py',7),
+  ('linhas -> linha','linhas',1,'p_linhas','yac_pug.py',15),
+  ('linhas -> linha linhas','linhas',2,'p_linhas','yac_pug.py',16),
+  ('linha -> IDENTACAO corpo NEWLINE','linha',3,'p_linha','yac_pug.py',34),
+  ('linha -> corpo NEWLINE','linha',2,'p_linha','yac_pug.py',35),
+  ('corpo -> tag','corpo',1,'p_corpo','yac_pug.py',52),
+  ('corpo -> tag SPACE TEXTO','corpo',3,'p_corpo','yac_pug.py',53),
+  ('corpo -> tag EQUAL SPACE TEXTO','corpo',4,'p_corpo','yac_pug.py',54),
+  ('tag -> TAG','tag',1,'p_tag','yac_pug.py',64),
+  ('tag -> CLASS','tag',1,'p_tag','yac_pug.py',65),
+  ('tag -> ID','tag',1,'p_tag','yac_pug.py',66),
+  ('tag -> TAG tag','tag',2,'p_tag','yac_pug.py',67),
+  ('tag -> CLASS tag','tag',2,'p_tag','yac_pug.py',68),
+  ('tag -> ID tag','tag',2,'p_tag','yac_pug.py',69),
+  ('tag -> tag LPAREN atributos RPAREN','tag',4,'p_tag','yac_pug.py',70),
+  ('atributos -> ATRIBUT','atributos',1,'p_atributos','yac_pug.py',90),
+  ('atributos -> ATRIBUT atributos','atributos',2,'p_atributos','yac_pug.py',91),
 ]

@@ -3,9 +3,9 @@ from yac_pug import parser
 
 data = open("example0.txt",'r',encoding="utf8").read()
 
-lexer.input(data)
-while s := lexer.token():
-   print(s)
+#lexer.input(data)
+#while s := lexer.token():
+#   print(s)
+#print("\n\n\n")
 
-print("\n\n\n")
-print(parser.parse(data))
+print(parser.parse(data,debug=0))
