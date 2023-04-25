@@ -10,6 +10,7 @@ def p_html(p):
     if type(p[1]) is list:
         for block in p[1]:
             p[0]+=block.html()
+
 def p_linhas(p):
     '''linhas : linhas NEWLINE linha
                 | linha
@@ -30,7 +31,6 @@ def p_linhas(p):
     elif len(p)==2:
         p[0]=[p[1]]
     
-   
 def p_linha(p):
     '''linha :  IDENTACAO corpo
                 | corpo
@@ -80,7 +80,7 @@ def p_tag(p):
         if '#' in p[1]:
             p[0]=(p[2][0],p[1],p[2][2],p[2][3])
         elif '.' in p[1]:
-            p[0]=(p[2][0],p[2][1],p[2][2].join(p[1].replace('.',' ')),p[2][3])
+            p[0]=(p[2][0],p[2][1],p[2][2]+(p[1].replace('.',' ')),p[2][3])
         else:
             p[0]=(p[1],p[2][1],p[2][2],p[2][3])
     elif len(p)==5:
