@@ -35,7 +35,6 @@ class Block:
             return -1
         
         return 1
-            
 
     def html(self):
         node = ' '*self.nivel_atual
@@ -48,7 +47,7 @@ class Block:
             node+=self.texto
 
         for b in self.sub_blocks:
-            node+= b.html()
+            node+="\n"+ b.html()
 
         node+= '\n'+' '*self.nivel_atual + f"</{self.tag}>"
         return node

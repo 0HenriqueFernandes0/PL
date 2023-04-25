@@ -7,37 +7,36 @@ def p_html(p):
                 | 
     '''
     p[0]=''
-    for block in p[1]:
-        p[0]+=block.html()
-    #print(p[0])
-
+    if type(p[1]) is list:
+        for block in p[1]:
+            p[0]+=block.html()
 def p_linhas(p):
-    '''linhas : linha
-                | linha linhas
+    '''linhas : linhas NEWLINE linha
+                | linha
     '''
-    
-    if len(p)==3:
-        if p[2][0] and p[2][0].nivel_atual > p[1].nivel_atual:
-            for b in p[2]:
-                cod = p[1].new_sub_block(b)
+    if len(p)==4:
+        next = p[1]
+        if type(next) is list and len (next)>0:
+            while len(next[-1].sub_blocks)>0 and next[-1].nivel_seguinte!= -1 and next[-1].nivel_seguinte < p[3].nivel_atual:
+                next = next[-1].sub_blocks
+            if p[3].nivel_atual > next[0].nivel_atual:
+                cod = next[-1].new_sub_block(p[3])
                 if cod == -1:
-                    print('erro na ideentaçao'+str(p[1]))
-            p[0]=[p[1]]
-        elif p[2][0] and p[2][0].nivel_atual == p[1].nivel_atual:
-            p[0]=p[2].append(p[1])
+                    print('erro na identaçao'+str(next))
+                p[0]=p[1]
+            elif next[0].nivel_atual == p[3].nivel_atual:
+                next.append(p[3])
+                p[0]=p[1]
     elif len(p)==2:
         p[0]=[p[1]]
-
-    print(p[0])
-    print("oi")
     
+   
 def p_linha(p):
-    '''linha :  IDENTACAO corpo NEWLINE
-                | corpo NEWLINE
+    '''linha :  IDENTACAO corpo
+                | corpo
     '''
-
     nivel=0
-    if len(p)==4:
+    if len(p)==3:
         info=p[2]
         for tok in p[1]:
             if tok == ' ':
