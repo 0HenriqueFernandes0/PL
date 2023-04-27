@@ -37,12 +37,8 @@ def p_linha(p):
     '''
     nivel=0
     if len(p)==3:
+        nivel=p[1]
         info=p[2]
-        for tok in p[1]:
-            if tok == ' ':
-                nivel+=1
-            if tok == '\t':
-                nivel+=4
     else:
         info=p[1]
 

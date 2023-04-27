@@ -1,11 +1,9 @@
 import ply.lex as lex
-from lexer.lexer_indentacao import*
 from lexer.lexer_tag import*
 from lexer.lexer_atributos import*
 from lexer.lexer_frase import*
 
 states = (
-    ('indentacao', 'exclusive'),
     ('atributos', 'exclusive'),
     ('tag', 'exclusive'),
     ('frase', 'exclusive')
@@ -44,6 +42,13 @@ def t_INITIAL_ID(t):
 
 def t_INITIAL_IDENTACAO(t):
     r'(\t|\ )+'
+    nivel = 0
+    for char in t.value:
+        if char==" ":
+            nivel+=1
+        elif char=="\t":
+            nivel+=4
+    t.value = nivel
     return t
 
 
