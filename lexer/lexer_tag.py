@@ -28,7 +28,7 @@ def t_tag_SPACE(t):
 def t_tag_NEWLINE(t):
     r'\n'
     t.lexer.lineno += len(t.value)
-    t.lexer.begin('indentacao')
+    t.lexer.begin('INITIAL')
     return t
 
 def t_tag_EQUAL(t):

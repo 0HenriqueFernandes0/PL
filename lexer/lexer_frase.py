@@ -7,7 +7,7 @@ def t_frase_TEXTO(t):
 def t_frase_NEWLINE(t):
     r'\n'
     t.lexer.lineno += len(t.value)
-    t.lexer.begin('indentacao')
+    t.lexer.begin('INITIAL')
     return t
 
 def t_frase_error(t):
