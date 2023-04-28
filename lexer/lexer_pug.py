@@ -2,11 +2,13 @@ import ply.lex as lex
 from lexer.lexer_tag import*
 from lexer.lexer_atributos import*
 from lexer.lexer_frase import*
+from lexer.lexer_textplain import*
 
 states = (
     ('atributos', 'exclusive'),
     ('tag', 'exclusive'),
-    ('frase', 'exclusive')
+    ('frase', 'exclusive'),
+    ('textplain', 'exclusive')
 )
 
 tokens = (
@@ -21,7 +23,8 @@ tokens = (
     'ID',
     'CLASS',
     'TEXTO',
-    'TEXTPLAIN'
+    'TEXTPLAIN',
+    'COMA'
 )
 
 
@@ -49,6 +52,7 @@ def t_INITIAL_IDENTACAO(t):
         elif char=="\t":
             nivel+=4
     t.value = nivel
+    t.lexer.nivel = nivel
     return t
 
 
@@ -59,3 +63,4 @@ def t_error(t):
     t.lexer.skip(1)
 
 lexer = lex.lex()
+lexer.nivel=0

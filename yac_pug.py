@@ -32,17 +32,30 @@ def p_linhas(p):
         p[0]=[p[1]]
     
 def p_linha(p):
-    '''linha :  IDENTACAO corpo
+    '''linha :  IDENTACAO tag COMA textplain
+                | IDENTACAO corpo
                 | corpo
     '''
     nivel=0
-    if len(p)==3:
+    if(len(p)==5):
+        nivel=p[1]
+        info=(p[2],p[4])
+    elif len(p)==3:
         nivel=p[1]
         info=p[2]
     else:
         info=p[1]
 
     p[0]=Block(nivel,info)
+
+def p_textplain(p):
+    '''textplain : NEWLINE IDENTACAO TEXTPLAIN textplain
+                  |
+    '''
+    if len(p)==5:
+        p[0]=p[4]+"\n"+p[3]
+    else:
+        p[0]=""
 
 def p_corpo(p):
     '''corpo :  tag

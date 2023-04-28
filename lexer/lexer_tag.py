@@ -11,8 +11,9 @@ def t_tag_ID(t):
     r'\#\w+'
     return t
 
-def t_tag_TEXTPLAIN(t):
+def t_tag_COMA(t):
     r'\.'
+    t.lexer.begin('textplain')
     return t
 
 def t_tag_LPAREN(t):

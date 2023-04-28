@@ -1,12 +1,7 @@
 
-def t_atributos_TEXTPLAIN(t):
-    r'\)\.'
-    t.lexer.begin('frase')
-    return t
-
 def t_atributos_RPAREN(t):
     r'\)'
-    t.lexer.begin('frase')
+    t.lexer.begin('tag')
     return t
 
 def t_atributos_ATRIBUT(t):
