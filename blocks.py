@@ -45,11 +45,13 @@ class Block:
 
         if(self.texto!=''):
             node+=self.texto
+        if len(self.sub_blocks)>0:
+            for b in self.sub_blocks:
+                node+="\n"+ b.html()
+            node+= '\n'+' '*self.nivel_atual + f"</{self.tag}>"
+        else:
+            node+= f"</{self.tag}>"
 
-        for b in self.sub_blocks:
-            node+="\n"+ b.html()
-
-        node+= '\n'+' '*self.nivel_atual + f"</{self.tag}>"
         return node
     
 
