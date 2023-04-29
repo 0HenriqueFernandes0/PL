@@ -12,34 +12,43 @@ def p_html(p):
             p[0]+=block.html()
 
 def p_linhas(p):
-    '''linhas : linhas NEWLINE linha
-                | linha
+    '''linhas : linhas NEWLINE linha_normal
+                | linha_normal
+                | linhas NEWLINE linha_textplain
     '''
     if len(p)==4:
         next = p[1]
         if type(next) is list and len (next)>0:
-            while len(next[-1].sub_blocks)>0 and next[-1].nivel_seguinte!= -1 and next[-1].nivel_seguinte < p[3].nivel_atual:
-                next = next[-1].sub_blocks
-            if p[3].nivel_atual > next[0].nivel_atual:
-                cod = next[-1].new_sub_block(p[3])
-                if cod == -1:
-                    print('erro na identaçao'+str(next))
-                p[0]=p[1]
-            elif next[0].nivel_atual == p[3].nivel_atual:
-                next.append(p[3])
+            if type(p[3]) == Block:
+                while len(next[-1].sub_blocks)>0 and next[-1].nivel_seguinte!= -1 and next[-1].nivel_seguinte < p[3].nivel_atual:
+                    next = next[-1].sub_blocks
+
+                if p[3].nivel_atual > next[0].nivel_atual:
+                    cod = next[-1].new_sub_block(p[3])
+                    if cod == -1:
+                        print('erro na identaçao'+str(next))
+                    p[0]=p[1]
+                elif next[0].nivel_atual == p[3].nivel_atual:
+                    next.append(p[3])
+                    p[0]=p[1]
+            elif type(p[3]) is str:
+                next=next[-1]
+                while len(next.sub_blocks)>0:
+                    next = next.sub_blocks[-1]
+                next.texto+=p[3]
                 p[0]=p[1]
     elif len(p)==2:
         p[0]=[p[1]]
-    
-def p_linha(p):
-    '''linha :  IDENTACAO tag COMA textplain
+
+def p_linha_normal(p):
+    '''linha_normal :  IDENTACAO corpo COMA
                 | IDENTACAO corpo
                 | corpo
     '''
     nivel=0
-    if(len(p)==5):
+    if(len(p)==4):
         nivel=p[1]
-        info=(p[2],p[4])
+        info=p[2]
     elif len(p)==3:
         nivel=p[1]
         info=p[2]
@@ -48,14 +57,9 @@ def p_linha(p):
 
     p[0]=Block(nivel,info)
 
-def p_textplain(p):
-    '''textplain : NEWLINE IDENTACAO TEXTPLAIN textplain
-                  |
-    '''
-    if len(p)==5:
-        p[0]=p[4]+"\n"+p[3]
-    else:
-        p[0]=""
+def p_linha_textplain(p):
+    'linha_textplain : IDENTACAO TEXTPLAIN '
+    p[0]= "\n"+ " " * p[1] + p[2]
 
 def p_corpo(p):
     '''corpo :  tag
