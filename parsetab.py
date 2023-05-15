@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ATRIBUT CLASS COMA ELSE EQUAL FOR ID IDENTACAO IF LPAREN NEWLINE RPAREN SPACE TAG TEXTO TEXTPLAINhtml :   linhas\n                | \n    linhas : linhas NEWLINE linha_normal\n                | linha_normal\n                | linhas NEWLINE linha_textplain\n    linha_normal :  IDENTACAO corpo COMA\n                | IDENTACAO corpo\n                | corpo\n    linha_textplain : IDENTACAO TEXTPLAIN corpo :  tag\n                | tag SPACE TEXTO\n                | tag EQUAL SPACE TEXTO\n    tag :    TAG\n                | CLASS \n                | ID\n                | TAG tag\n                | CLASS tag\n                | ID tag\n                | tag LPAREN atributos RPAREN\n    atributos :   ATRIBUT\n                    | ATRIBUT atributos\n    '
+_lr_signature = 'ATRIBUT CLASS COMA ELSE EQUAL FOR ID IDENTACAO IF LPAREN NEWLINE RPAREN SPACE TAG TEXTO TEXTPLAINhtml :   linhas\n                | html codigo linhas \n    codigo : IDENTACAO IF TEXTO NEWLINE\n                | IDENTACAO ELSE\n    linhas : linhas NEWLINE linha_normal\n                | linha_normal\n                | linhas NEWLINE linha_textplain\n    linha_normal :  IDENTACAO corpo COMA\n                | IDENTACAO corpo\n                | corpo\n    linha_textplain : IDENTACAO TEXTPLAIN corpo :  tag\n                | tag SPACE TEXTO\n                | tag EQUAL SPACE TEXTO\n    tag :    TAG\n                | CLASS \n                | ID\n                | TAG tag\n                | CLASS tag\n                | ID tag\n                | tag LPAREN atributos RPAREN\n    atributos :   ATRIBUT\n                    | ATRIBUT atributos\n    '
     
-_lr_action_items = {'$end':([0,1,2,3,5,6,7,8,9,11,15,16,17,18,19,21,22,26,27,28,],[-2,0,-1,-4,-8,-10,-13,-14,-15,-7,-16,-17,-18,-3,-5,-6,-11,-9,-12,-19,]),'IDENTACAO':([0,10,],[4,20,]),'TAG':([0,4,7,8,9,10,20,],[7,7,7,7,7,7,7,]),'CLASS':([0,4,7,8,9,10,20,],[8,8,8,8,8,8,8,]),'ID':([0,4,7,8,9,10,20,],[9,9,9,9,9,9,9,]),'NEWLINE':([2,3,5,6,7,8,9,11,15,16,17,18,19,21,22,26,27,28,],[10,-4,-8,-10,-13,-14,-15,-7,-16,-17,-18,-3,-5,-6,-11,-9,-12,-19,]),'COMA':([6,7,8,9,11,15,16,17,22,27,28,],[-10,-13,-14,-15,21,-16,-17,-18,-11,-12,-19,]),'SPACE':([6,7,8,9,13,15,16,17,28,],[12,-13,-14,-15,23,-16,-17,-18,-19,]),'EQUAL':([6,7,8,9,15,16,17,28,],[13,-13,-14,-15,-16,-17,-18,-19,]),'LPAREN':([6,7,8,9,15,16,17,28,],[14,-13,-14,-15,14,14,14,-19,]),'TEXTO':([12,23,],[22,27,]),'ATRIBUT':([14,25,],[25,25,]),'TEXTPLAIN':([20,],[26,]),'RPAREN':([24,25,29,],[28,-20,-21,]),}
+_lr_action_items = {'IDENTACAO':([0,1,2,3,5,6,7,8,9,10,12,13,17,18,19,20,22,23,24,26,27,32,33,34,36,],[4,11,-1,-6,-10,-12,-15,-16,-17,4,25,-9,-18,-19,-20,-2,-4,-5,-7,-8,-13,-11,-14,-21,-3,]),'TAG':([0,4,7,8,9,10,12,22,25,36,],[7,7,7,7,7,7,7,-4,7,-3,]),'CLASS':([0,4,7,8,9,10,12,22,25,36,],[8,8,8,8,8,8,8,-4,8,-3,]),'ID':([0,4,7,8,9,10,12,22,25,36,],[9,9,9,9,9,9,9,-4,9,-3,]),'$end':([1,2,3,5,6,7,8,9,13,17,18,19,20,23,24,26,27,32,33,34,],[0,-1,-6,-10,-12,-15,-16,-17,-9,-18,-19,-20,-2,-5,-7,-8,-13,-11,-14,-21,]),'NEWLINE':([2,3,5,6,7,8,9,13,17,18,19,20,23,24,26,27,31,32,33,34,],[12,-6,-10,-12,-15,-16,-17,-9,-18,-19,-20,12,-5,-7,-8,-13,36,-11,-14,-21,]),'COMA':([6,7,8,9,13,17,18,19,27,33,34,],[-12,-15,-16,-17,26,-18,-19,-20,-13,-14,-21,]),'SPACE':([6,7,8,9,15,17,18,19,34,],[14,-15,-16,-17,28,-18,-19,-20,-21,]),'EQUAL':([6,7,8,9,17,18,19,34,],[15,-15,-16,-17,-18,-19,-20,-21,]),'LPAREN':([6,7,8,9,17,18,19,34,],[16,-15,-16,-17,16,16,16,-21,]),'IF':([11,],[21,]),'ELSE':([11,],[22,]),'TEXTO':([14,21,28,],[27,31,33,]),'ATRIBUT':([16,30,],[30,30,]),'TEXTPLAIN':([25,],[32,]),'RPAREN':([29,30,35,],[34,-22,-23,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'html':([0,],[1,]),'linhas':([0,],[2,]),'linha_normal':([0,10,],[3,18,]),'corpo':([0,4,10,20,],[5,11,5,11,]),'tag':([0,4,7,8,9,10,20,],[6,6,15,16,17,6,6,]),'linha_textplain':([10,],[19,]),'atributos':([14,25,],[24,29,]),}
+_lr_goto_items = {'html':([0,],[1,]),'linhas':([0,10,],[2,20,]),'linha_normal':([0,10,12,],[3,3,23,]),'corpo':([0,4,10,12,25,],[5,13,5,5,13,]),'tag':([0,4,7,8,9,10,12,25,],[6,6,17,18,19,6,6,6,]),'codigo':([1,],[10,]),'linha_textplain':([12,],[24,]),'atributos':([16,30,],[29,35,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -28,24 +28,26 @@ del _lr_goto_items
 _lr_productions = [
   ("S' -> html","S'",1,None,None,None),
   ('html -> linhas','html',1,'p_html','yac_pug.py',6),
-  ('html -> <empty>','html',0,'p_html','yac_pug.py',7),
-  ('linhas -> linhas NEWLINE linha_normal','linhas',3,'p_linhas','yac_pug.py',15),
-  ('linhas -> linha_normal','linhas',1,'p_linhas','yac_pug.py',16),
-  ('linhas -> linhas NEWLINE linha_textplain','linhas',3,'p_linhas','yac_pug.py',17),
-  ('linha_normal -> IDENTACAO corpo COMA','linha_normal',3,'p_linha_normal','yac_pug.py',44),
-  ('linha_normal -> IDENTACAO corpo','linha_normal',2,'p_linha_normal','yac_pug.py',45),
-  ('linha_normal -> corpo','linha_normal',1,'p_linha_normal','yac_pug.py',46),
-  ('linha_textplain -> IDENTACAO TEXTPLAIN','linha_textplain',2,'p_linha_textplain','yac_pug.py',61),
-  ('corpo -> tag','corpo',1,'p_corpo','yac_pug.py',65),
-  ('corpo -> tag SPACE TEXTO','corpo',3,'p_corpo','yac_pug.py',66),
-  ('corpo -> tag EQUAL SPACE TEXTO','corpo',4,'p_corpo','yac_pug.py',67),
-  ('tag -> TAG','tag',1,'p_tag','yac_pug.py',77),
-  ('tag -> CLASS','tag',1,'p_tag','yac_pug.py',78),
-  ('tag -> ID','tag',1,'p_tag','yac_pug.py',79),
-  ('tag -> TAG tag','tag',2,'p_tag','yac_pug.py',80),
-  ('tag -> CLASS tag','tag',2,'p_tag','yac_pug.py',81),
-  ('tag -> ID tag','tag',2,'p_tag','yac_pug.py',82),
-  ('tag -> tag LPAREN atributos RPAREN','tag',4,'p_tag','yac_pug.py',83),
-  ('atributos -> ATRIBUT','atributos',1,'p_atributos','yac_pug.py',103),
-  ('atributos -> ATRIBUT atributos','atributos',2,'p_atributos','yac_pug.py',104),
+  ('html -> html codigo linhas','html',3,'p_html','yac_pug.py',7),
+  ('codigo -> IDENTACAO IF TEXTO NEWLINE','codigo',4,'p_codigo','yac_pug.py',15),
+  ('codigo -> IDENTACAO ELSE','codigo',2,'p_codigo','yac_pug.py',16),
+  ('linhas -> linhas NEWLINE linha_normal','linhas',3,'p_linhas','yac_pug.py',22),
+  ('linhas -> linha_normal','linhas',1,'p_linhas','yac_pug.py',23),
+  ('linhas -> linhas NEWLINE linha_textplain','linhas',3,'p_linhas','yac_pug.py',24),
+  ('linha_normal -> IDENTACAO corpo COMA','linha_normal',3,'p_linha_normal','yac_pug.py',51),
+  ('linha_normal -> IDENTACAO corpo','linha_normal',2,'p_linha_normal','yac_pug.py',52),
+  ('linha_normal -> corpo','linha_normal',1,'p_linha_normal','yac_pug.py',53),
+  ('linha_textplain -> IDENTACAO TEXTPLAIN','linha_textplain',2,'p_linha_textplain','yac_pug.py',68),
+  ('corpo -> tag','corpo',1,'p_corpo','yac_pug.py',72),
+  ('corpo -> tag SPACE TEXTO','corpo',3,'p_corpo','yac_pug.py',73),
+  ('corpo -> tag EQUAL SPACE TEXTO','corpo',4,'p_corpo','yac_pug.py',74),
+  ('tag -> TAG','tag',1,'p_tag','yac_pug.py',84),
+  ('tag -> CLASS','tag',1,'p_tag','yac_pug.py',85),
+  ('tag -> ID','tag',1,'p_tag','yac_pug.py',86),
+  ('tag -> TAG tag','tag',2,'p_tag','yac_pug.py',87),
+  ('tag -> CLASS tag','tag',2,'p_tag','yac_pug.py',88),
+  ('tag -> ID tag','tag',2,'p_tag','yac_pug.py',89),
+  ('tag -> tag LPAREN atributos RPAREN','tag',4,'p_tag','yac_pug.py',90),
+  ('atributos -> ATRIBUT','atributos',1,'p_atributos','yac_pug.py',110),
+  ('atributos -> ATRIBUT atributos','atributos',2,'p_atributos','yac_pug.py',111),
 ]

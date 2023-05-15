@@ -4,12 +4,19 @@ from blocks import Block
 
 def p_html(p):
     '''html :   linhas
-                | 
+                | html codigo linhas 
     '''
     p[0]=''
     if type(p[1]) is list:
         for block in p[1]:
             p[0]+=block.html()
+
+def p_codigo(p):
+    '''codigo : IDENTACAO IF TEXTO NEWLINE
+                | IDENTACAO ELSE
+    '''
+    print(p[2])
+    pass
 
 def p_linhas(p):
     '''linhas : linhas NEWLINE linha_normal

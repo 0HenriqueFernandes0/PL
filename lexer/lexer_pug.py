@@ -38,8 +38,7 @@ def t_INITIAL_IF(t):
     return t
 
 def t_INITIAL_ELSE(t):
-    r'else '
-    t.lexer.begin('frase')
+    r'else(\s)*\n'
     return t
 
 def t_INITIAL_FOR(t):
