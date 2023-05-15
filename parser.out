@@ -1,5 +1,11 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    ELSE
+    FOR
+    IF
+
 Grammar
 
 Rule 0     S' -> html
@@ -30,9 +36,12 @@ Terminals, with rules where they appear
 ATRIBUT              : 20 21
 CLASS                : 14 17
 COMA                 : 6
+ELSE                 : 
 EQUAL                : 12
+FOR                  : 
 ID                   : 15 18
 IDENTACAO            : 6 7 9
+IF                   : 
 LPAREN               : 19
 NEWLINE              : 3 5
 RPAREN               : 19
