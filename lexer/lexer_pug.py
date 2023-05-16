@@ -4,13 +4,15 @@ from lexer.lexer_atributos import*
 from lexer.lexer_frase import*
 from lexer.lexer_textplain import*
 from lexer.lexer_code import*
+from lexer.lexer_variaveis import*
 
 states = (
     ('atributos', 'exclusive'),
     ('tag', 'exclusive'),
     ('frase', 'exclusive'),
     ('textplain', 'exclusive'),
-    ('code', 'exclusive')
+    ('code', 'exclusive'),
+    ('variaveis', 'exclusive')
 )
 
 tokens = (
@@ -29,16 +31,23 @@ tokens = (
     'COMA',
     'IF',
     'ELSE',
-    'FOR'
+    'FOR',
+    'VAR'
 )
+def t_INITIAL_VAR(t):
+    r'\-'
+    t.lexer.begin('variaveis')
+    return t
 
 def t_INITIAL_IF(t):
-    r'if '
+    r'if(\ )*'
+    t.value="if"
     t.lexer.begin('frase')
     return t
 
 def t_INITIAL_ELSE(t):
-    r'else(\s)*\n'
+    r'else'
+    t.lexer.begin('frase')
     return t
 
 def t_INITIAL_FOR(t):

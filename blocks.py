@@ -1,9 +1,4 @@
-# abin_ast.py
-# 2023-03-21 by jcr
-# ----------------------
-# P1: Block --> tag  
-# P2:        | tag atributos texto List_blocks   
-# -------------------------------         
+
 class Block:
     def __init__(self,nivel_atual,info):
         self.nivel_atual = nivel_atual
@@ -46,13 +41,51 @@ class Block:
         if(self.texto!=''):
             node+=self.texto
         if len(self.sub_blocks)>0:
+            code_ty_ant = None
+            code_bol_ant = None
             for b in self.sub_blocks:
-                node+="\n"+ b.html()
+                if type(b) is Block:
+                    node+="\n"+ b.html()
+                elif type(b) is Code:
+                    if b.bol==None:
+                        if code_ty_ant == 'if':
+                            b.bol= not code_bol_ant
+                        else:
+                            print("error else without if\n")
+                    code_ty_ant = b.type
+                    code_bol_ant = b.bol
+                    node+=b.html()
             node+= '\n'+' '*self.nivel_atual + f"</{self.tag}>"
         else:
             node+= f"</{self.tag}>"
 
         return node
     
+class Code:
+    def __init__(self,nivel_atual,bol,number,type):
+        self.nivel_atual = nivel_atual
+        self.nivel_seguinte = -1
+        self.bol=bol
+        self.number=number
+        self.type=type
+        self.sub_blocks = []
 
-    
+    def new_sub_block(self,block):
+        if(self.nivel_seguinte==-1):
+            self.nivel_seguinte=block.nivel_atual
+            self.sub_blocks.append(block)
+        elif(self.nivel_seguinte==block.nivel_atual):
+            self.sub_blocks.append(block)
+        else:
+            return -1
+        
+        return 1
+
+    def html(self):
+        node = ''
+        if self.bol:
+            for i in range(self.number):
+                if len(self.sub_blocks)>0:
+                    for b in self.sub_blocks:
+                        node+="\n"+ b.html()
+        return node

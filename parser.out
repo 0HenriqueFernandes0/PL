@@ -8,59 +8,69 @@ Grammar
 
 Rule 0     S' -> html
 Rule 1     html -> linhas
-Rule 2     html -> html codigo linhas
-Rule 3     codigo -> IDENTACAO IF TEXTO NEWLINE
-Rule 4     codigo -> IDENTACAO ELSE
-Rule 5     linhas -> linhas NEWLINE linha_normal
-Rule 6     linhas -> linha_normal
-Rule 7     linhas -> linhas NEWLINE linha_textplain
-Rule 8     linha_normal -> IDENTACAO corpo COMA
-Rule 9     linha_normal -> IDENTACAO corpo
-Rule 10    linha_normal -> corpo
-Rule 11    linha_textplain -> IDENTACAO TEXTPLAIN
-Rule 12    corpo -> tag
-Rule 13    corpo -> tag SPACE TEXTO
-Rule 14    corpo -> tag EQUAL SPACE TEXTO
-Rule 15    tag -> TAG
-Rule 16    tag -> CLASS
-Rule 17    tag -> ID
-Rule 18    tag -> TAG tag
-Rule 19    tag -> CLASS tag
-Rule 20    tag -> ID tag
-Rule 21    tag -> tag LPAREN atributos RPAREN
-Rule 22    atributos -> ATRIBUT
-Rule 23    atributos -> ATRIBUT atributos
+Rule 2     html -> <empty>
+Rule 3     linhas -> linhas NEWLINE linha_normal
+Rule 4     linhas -> linha_normal
+Rule 5     linhas -> linhas NEWLINE linha_codigo
+Rule 6     linhas -> linha_codigo
+Rule 7     linhas -> linhas NEWLINE linha_var
+Rule 8     linhas -> linha_var
+Rule 9     linhas -> linhas NEWLINE linha_textplain
+Rule 10    linha_var -> IDENTACAO VAR TEXTO EQUAL TEXTO
+Rule 11    linha_var -> VAR TEXTO EQUAL TEXTO
+Rule 12    linha_codigo -> IDENTACAO IF TEXTO
+Rule 13    linha_codigo -> IF TEXTO
+Rule 14    linha_codigo -> IDENTACAO ELSE
+Rule 15    linha_codigo -> ELSE
+Rule 16    linha_normal -> IDENTACAO corpo COMA
+Rule 17    linha_normal -> IDENTACAO corpo
+Rule 18    linha_normal -> corpo
+Rule 19    linha_textplain -> IDENTACAO TEXTPLAIN
+Rule 20    corpo -> tag
+Rule 21    corpo -> tag SPACE TEXTO
+Rule 22    corpo -> tag EQUAL SPACE TEXTO
+Rule 23    tag -> TAG
+Rule 24    tag -> CLASS
+Rule 25    tag -> ID
+Rule 26    tag -> TAG tag
+Rule 27    tag -> CLASS tag
+Rule 28    tag -> ID tag
+Rule 29    tag -> tag LPAREN atributos RPAREN
+Rule 30    atributos -> ATRIBUT
+Rule 31    atributos -> ATRIBUT atributos
 
 Terminals, with rules where they appear
 
-ATRIBUT              : 22 23
-CLASS                : 16 19
-COMA                 : 8
-ELSE                 : 4
-EQUAL                : 14
+ATRIBUT              : 30 31
+CLASS                : 24 27
+COMA                 : 16
+ELSE                 : 14 15
+EQUAL                : 10 11 22
 FOR                  : 
-ID                   : 17 20
-IDENTACAO            : 3 4 8 9 11
-IF                   : 3
-LPAREN               : 21
-NEWLINE              : 3 5 7
-RPAREN               : 21
-SPACE                : 13 14
-TAG                  : 15 18
-TEXTO                : 3 13 14
-TEXTPLAIN            : 11
+ID                   : 25 28
+IDENTACAO            : 10 12 14 16 17 19
+IF                   : 12 13
+LPAREN               : 29
+NEWLINE              : 3 5 7 9
+RPAREN               : 29
+SPACE                : 21 22
+TAG                  : 23 26
+TEXTO                : 10 10 11 11 12 13 21 22
+TEXTPLAIN            : 19
+VAR                  : 10 11
 error                : 
 
 Nonterminals, with rules where they appear
 
-atributos            : 21 23
-codigo               : 2
-corpo                : 8 9 10
-html                 : 2 0
-linha_normal         : 5 6
-linha_textplain      : 7
-linhas               : 1 2 5 7
-tag                  : 12 13 14 18 19 20 21
+atributos            : 29 31
+corpo                : 16 17 18
+html                 : 0
+linha_codigo         : 5 6
+linha_normal         : 3 4
+linha_textplain      : 9
+linha_var            : 7 8
+linhas               : 1 3 5 7 9
+tag                  : 20 21 22 26 27 28 29
 
 Parsing method: LALR
 
@@ -68,515 +78,587 @@ state 0
 
     (0) S' -> . html
     (1) html -> . linhas
-    (2) html -> . html codigo linhas
-    (5) linhas -> . linhas NEWLINE linha_normal
-    (6) linhas -> . linha_normal
-    (7) linhas -> . linhas NEWLINE linha_textplain
-    (8) linha_normal -> . IDENTACAO corpo COMA
-    (9) linha_normal -> . IDENTACAO corpo
-    (10) linha_normal -> . corpo
-    (12) corpo -> . tag
-    (13) corpo -> . tag SPACE TEXTO
-    (14) corpo -> . tag EQUAL SPACE TEXTO
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (2) html -> .
+    (3) linhas -> . linhas NEWLINE linha_normal
+    (4) linhas -> . linha_normal
+    (5) linhas -> . linhas NEWLINE linha_codigo
+    (6) linhas -> . linha_codigo
+    (7) linhas -> . linhas NEWLINE linha_var
+    (8) linhas -> . linha_var
+    (9) linhas -> . linhas NEWLINE linha_textplain
+    (16) linha_normal -> . IDENTACAO corpo COMA
+    (17) linha_normal -> . IDENTACAO corpo
+    (18) linha_normal -> . corpo
+    (12) linha_codigo -> . IDENTACAO IF TEXTO
+    (13) linha_codigo -> . IF TEXTO
+    (14) linha_codigo -> . IDENTACAO ELSE
+    (15) linha_codigo -> . ELSE
+    (10) linha_var -> . IDENTACAO VAR TEXTO EQUAL TEXTO
+    (11) linha_var -> . VAR TEXTO EQUAL TEXTO
+    (20) corpo -> . tag
+    (21) corpo -> . tag SPACE TEXTO
+    (22) corpo -> . tag EQUAL SPACE TEXTO
+    (23) tag -> . TAG
+    (24) tag -> . CLASS
+    (25) tag -> . ID
+    (26) tag -> . TAG tag
+    (27) tag -> . CLASS tag
+    (28) tag -> . ID tag
+    (29) tag -> . tag LPAREN atributos RPAREN
 
-    IDENTACAO       shift and go to state 4
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+    $end            reduce using rule 2 (html -> .)
+    IDENTACAO       shift and go to state 6
+    IF              shift and go to state 8
+    ELSE            shift and go to state 9
+    VAR             shift and go to state 10
+    TAG             shift and go to state 12
+    CLASS           shift and go to state 13
+    ID              shift and go to state 14
 
     html                           shift and go to state 1
     linhas                         shift and go to state 2
     linha_normal                   shift and go to state 3
-    corpo                          shift and go to state 5
-    tag                            shift and go to state 6
+    linha_codigo                   shift and go to state 4
+    linha_var                      shift and go to state 5
+    corpo                          shift and go to state 7
+    tag                            shift and go to state 11
 
 state 1
 
     (0) S' -> html .
-    (2) html -> html . codigo linhas
-    (3) codigo -> . IDENTACAO IF TEXTO NEWLINE
-    (4) codigo -> . IDENTACAO ELSE
 
-    IDENTACAO       shift and go to state 11
 
-    codigo                         shift and go to state 10
 
 state 2
 
     (1) html -> linhas .
-    (5) linhas -> linhas . NEWLINE linha_normal
-    (7) linhas -> linhas . NEWLINE linha_textplain
+    (3) linhas -> linhas . NEWLINE linha_normal
+    (5) linhas -> linhas . NEWLINE linha_codigo
+    (7) linhas -> linhas . NEWLINE linha_var
+    (9) linhas -> linhas . NEWLINE linha_textplain
 
-    IDENTACAO       reduce using rule 1 (html -> linhas .)
     $end            reduce using rule 1 (html -> linhas .)
-    NEWLINE         shift and go to state 12
+    NEWLINE         shift and go to state 15
 
 
 state 3
 
-    (6) linhas -> linha_normal .
+    (4) linhas -> linha_normal .
 
-    NEWLINE         reduce using rule 6 (linhas -> linha_normal .)
-    IDENTACAO       reduce using rule 6 (linhas -> linha_normal .)
-    $end            reduce using rule 6 (linhas -> linha_normal .)
+    NEWLINE         reduce using rule 4 (linhas -> linha_normal .)
+    $end            reduce using rule 4 (linhas -> linha_normal .)
 
 
 state 4
 
-    (8) linha_normal -> IDENTACAO . corpo COMA
-    (9) linha_normal -> IDENTACAO . corpo
-    (12) corpo -> . tag
-    (13) corpo -> . tag SPACE TEXTO
-    (14) corpo -> . tag EQUAL SPACE TEXTO
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (6) linhas -> linha_codigo .
 
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+    NEWLINE         reduce using rule 6 (linhas -> linha_codigo .)
+    $end            reduce using rule 6 (linhas -> linha_codigo .)
 
-    corpo                          shift and go to state 13
-    tag                            shift and go to state 6
 
 state 5
 
-    (10) linha_normal -> corpo .
+    (8) linhas -> linha_var .
 
-    NEWLINE         reduce using rule 10 (linha_normal -> corpo .)
-    IDENTACAO       reduce using rule 10 (linha_normal -> corpo .)
-    $end            reduce using rule 10 (linha_normal -> corpo .)
+    NEWLINE         reduce using rule 8 (linhas -> linha_var .)
+    $end            reduce using rule 8 (linhas -> linha_var .)
 
 
 state 6
 
-    (12) corpo -> tag .
-    (13) corpo -> tag . SPACE TEXTO
-    (14) corpo -> tag . EQUAL SPACE TEXTO
-    (21) tag -> tag . LPAREN atributos RPAREN
+    (16) linha_normal -> IDENTACAO . corpo COMA
+    (17) linha_normal -> IDENTACAO . corpo
+    (12) linha_codigo -> IDENTACAO . IF TEXTO
+    (14) linha_codigo -> IDENTACAO . ELSE
+    (10) linha_var -> IDENTACAO . VAR TEXTO EQUAL TEXTO
+    (20) corpo -> . tag
+    (21) corpo -> . tag SPACE TEXTO
+    (22) corpo -> . tag EQUAL SPACE TEXTO
+    (23) tag -> . TAG
+    (24) tag -> . CLASS
+    (25) tag -> . ID
+    (26) tag -> . TAG tag
+    (27) tag -> . CLASS tag
+    (28) tag -> . ID tag
+    (29) tag -> . tag LPAREN atributos RPAREN
 
-    NEWLINE         reduce using rule 12 (corpo -> tag .)
-    IDENTACAO       reduce using rule 12 (corpo -> tag .)
-    $end            reduce using rule 12 (corpo -> tag .)
-    COMA            reduce using rule 12 (corpo -> tag .)
-    SPACE           shift and go to state 14
-    EQUAL           shift and go to state 15
-    LPAREN          shift and go to state 16
+    IF              shift and go to state 17
+    ELSE            shift and go to state 18
+    VAR             shift and go to state 19
+    TAG             shift and go to state 12
+    CLASS           shift and go to state 13
+    ID              shift and go to state 14
 
+    corpo                          shift and go to state 16
+    tag                            shift and go to state 11
 
 state 7
 
-    (15) tag -> TAG .
-    (18) tag -> TAG . tag
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (18) linha_normal -> corpo .
 
-    SPACE           reduce using rule 15 (tag -> TAG .)
-    EQUAL           reduce using rule 15 (tag -> TAG .)
-    LPAREN          reduce using rule 15 (tag -> TAG .)
-    NEWLINE         reduce using rule 15 (tag -> TAG .)
-    IDENTACAO       reduce using rule 15 (tag -> TAG .)
-    $end            reduce using rule 15 (tag -> TAG .)
-    COMA            reduce using rule 15 (tag -> TAG .)
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+    NEWLINE         reduce using rule 18 (linha_normal -> corpo .)
+    $end            reduce using rule 18 (linha_normal -> corpo .)
 
-    tag                            shift and go to state 17
 
 state 8
 
-    (16) tag -> CLASS .
-    (19) tag -> CLASS . tag
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (13) linha_codigo -> IF . TEXTO
 
-    SPACE           reduce using rule 16 (tag -> CLASS .)
-    EQUAL           reduce using rule 16 (tag -> CLASS .)
-    LPAREN          reduce using rule 16 (tag -> CLASS .)
-    NEWLINE         reduce using rule 16 (tag -> CLASS .)
-    IDENTACAO       reduce using rule 16 (tag -> CLASS .)
-    $end            reduce using rule 16 (tag -> CLASS .)
-    COMA            reduce using rule 16 (tag -> CLASS .)
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+    TEXTO           shift and go to state 20
 
-    tag                            shift and go to state 18
 
 state 9
 
-    (17) tag -> ID .
-    (20) tag -> ID . tag
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (15) linha_codigo -> ELSE .
 
-    SPACE           reduce using rule 17 (tag -> ID .)
-    EQUAL           reduce using rule 17 (tag -> ID .)
-    LPAREN          reduce using rule 17 (tag -> ID .)
-    NEWLINE         reduce using rule 17 (tag -> ID .)
-    IDENTACAO       reduce using rule 17 (tag -> ID .)
-    $end            reduce using rule 17 (tag -> ID .)
-    COMA            reduce using rule 17 (tag -> ID .)
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+    NEWLINE         reduce using rule 15 (linha_codigo -> ELSE .)
+    $end            reduce using rule 15 (linha_codigo -> ELSE .)
 
-    tag                            shift and go to state 19
 
 state 10
 
-    (2) html -> html codigo . linhas
-    (5) linhas -> . linhas NEWLINE linha_normal
-    (6) linhas -> . linha_normal
-    (7) linhas -> . linhas NEWLINE linha_textplain
-    (8) linha_normal -> . IDENTACAO corpo COMA
-    (9) linha_normal -> . IDENTACAO corpo
-    (10) linha_normal -> . corpo
-    (12) corpo -> . tag
-    (13) corpo -> . tag SPACE TEXTO
-    (14) corpo -> . tag EQUAL SPACE TEXTO
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (11) linha_var -> VAR . TEXTO EQUAL TEXTO
 
-    IDENTACAO       shift and go to state 4
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+    TEXTO           shift and go to state 21
 
-    linhas                         shift and go to state 20
-    linha_normal                   shift and go to state 3
-    corpo                          shift and go to state 5
-    tag                            shift and go to state 6
 
 state 11
 
-    (3) codigo -> IDENTACAO . IF TEXTO NEWLINE
-    (4) codigo -> IDENTACAO . ELSE
+    (20) corpo -> tag .
+    (21) corpo -> tag . SPACE TEXTO
+    (22) corpo -> tag . EQUAL SPACE TEXTO
+    (29) tag -> tag . LPAREN atributos RPAREN
 
-    IF              shift and go to state 21
-    ELSE            shift and go to state 22
+    NEWLINE         reduce using rule 20 (corpo -> tag .)
+    $end            reduce using rule 20 (corpo -> tag .)
+    COMA            reduce using rule 20 (corpo -> tag .)
+    SPACE           shift and go to state 22
+    EQUAL           shift and go to state 23
+    LPAREN          shift and go to state 24
 
 
 state 12
 
-    (5) linhas -> linhas NEWLINE . linha_normal
-    (7) linhas -> linhas NEWLINE . linha_textplain
-    (8) linha_normal -> . IDENTACAO corpo COMA
-    (9) linha_normal -> . IDENTACAO corpo
-    (10) linha_normal -> . corpo
-    (11) linha_textplain -> . IDENTACAO TEXTPLAIN
-    (12) corpo -> . tag
-    (13) corpo -> . tag SPACE TEXTO
-    (14) corpo -> . tag EQUAL SPACE TEXTO
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (23) tag -> TAG .
+    (26) tag -> TAG . tag
+    (23) tag -> . TAG
+    (24) tag -> . CLASS
+    (25) tag -> . ID
+    (26) tag -> . TAG tag
+    (27) tag -> . CLASS tag
+    (28) tag -> . ID tag
+    (29) tag -> . tag LPAREN atributos RPAREN
 
-    IDENTACAO       shift and go to state 25
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+    SPACE           reduce using rule 23 (tag -> TAG .)
+    EQUAL           reduce using rule 23 (tag -> TAG .)
+    LPAREN          reduce using rule 23 (tag -> TAG .)
+    NEWLINE         reduce using rule 23 (tag -> TAG .)
+    $end            reduce using rule 23 (tag -> TAG .)
+    COMA            reduce using rule 23 (tag -> TAG .)
+    TAG             shift and go to state 12
+    CLASS           shift and go to state 13
+    ID              shift and go to state 14
 
-    linha_normal                   shift and go to state 23
-    linha_textplain                shift and go to state 24
-    corpo                          shift and go to state 5
-    tag                            shift and go to state 6
+    tag                            shift and go to state 25
 
 state 13
 
-    (8) linha_normal -> IDENTACAO corpo . COMA
-    (9) linha_normal -> IDENTACAO corpo .
+    (24) tag -> CLASS .
+    (27) tag -> CLASS . tag
+    (23) tag -> . TAG
+    (24) tag -> . CLASS
+    (25) tag -> . ID
+    (26) tag -> . TAG tag
+    (27) tag -> . CLASS tag
+    (28) tag -> . ID tag
+    (29) tag -> . tag LPAREN atributos RPAREN
 
-    COMA            shift and go to state 26
-    NEWLINE         reduce using rule 9 (linha_normal -> IDENTACAO corpo .)
-    IDENTACAO       reduce using rule 9 (linha_normal -> IDENTACAO corpo .)
-    $end            reduce using rule 9 (linha_normal -> IDENTACAO corpo .)
+    SPACE           reduce using rule 24 (tag -> CLASS .)
+    EQUAL           reduce using rule 24 (tag -> CLASS .)
+    LPAREN          reduce using rule 24 (tag -> CLASS .)
+    NEWLINE         reduce using rule 24 (tag -> CLASS .)
+    $end            reduce using rule 24 (tag -> CLASS .)
+    COMA            reduce using rule 24 (tag -> CLASS .)
+    TAG             shift and go to state 12
+    CLASS           shift and go to state 13
+    ID              shift and go to state 14
 
+    tag                            shift and go to state 26
 
 state 14
 
-    (13) corpo -> tag SPACE . TEXTO
+    (25) tag -> ID .
+    (28) tag -> ID . tag
+    (23) tag -> . TAG
+    (24) tag -> . CLASS
+    (25) tag -> . ID
+    (26) tag -> . TAG tag
+    (27) tag -> . CLASS tag
+    (28) tag -> . ID tag
+    (29) tag -> . tag LPAREN atributos RPAREN
 
-    TEXTO           shift and go to state 27
+    SPACE           reduce using rule 25 (tag -> ID .)
+    EQUAL           reduce using rule 25 (tag -> ID .)
+    LPAREN          reduce using rule 25 (tag -> ID .)
+    NEWLINE         reduce using rule 25 (tag -> ID .)
+    $end            reduce using rule 25 (tag -> ID .)
+    COMA            reduce using rule 25 (tag -> ID .)
+    TAG             shift and go to state 12
+    CLASS           shift and go to state 13
+    ID              shift and go to state 14
 
+    tag                            shift and go to state 27
 
 state 15
 
-    (14) corpo -> tag EQUAL . SPACE TEXTO
+    (3) linhas -> linhas NEWLINE . linha_normal
+    (5) linhas -> linhas NEWLINE . linha_codigo
+    (7) linhas -> linhas NEWLINE . linha_var
+    (9) linhas -> linhas NEWLINE . linha_textplain
+    (16) linha_normal -> . IDENTACAO corpo COMA
+    (17) linha_normal -> . IDENTACAO corpo
+    (18) linha_normal -> . corpo
+    (12) linha_codigo -> . IDENTACAO IF TEXTO
+    (13) linha_codigo -> . IF TEXTO
+    (14) linha_codigo -> . IDENTACAO ELSE
+    (15) linha_codigo -> . ELSE
+    (10) linha_var -> . IDENTACAO VAR TEXTO EQUAL TEXTO
+    (11) linha_var -> . VAR TEXTO EQUAL TEXTO
+    (19) linha_textplain -> . IDENTACAO TEXTPLAIN
+    (20) corpo -> . tag
+    (21) corpo -> . tag SPACE TEXTO
+    (22) corpo -> . tag EQUAL SPACE TEXTO
+    (23) tag -> . TAG
+    (24) tag -> . CLASS
+    (25) tag -> . ID
+    (26) tag -> . TAG tag
+    (27) tag -> . CLASS tag
+    (28) tag -> . ID tag
+    (29) tag -> . tag LPAREN atributos RPAREN
 
-    SPACE           shift and go to state 28
+    IDENTACAO       shift and go to state 32
+    IF              shift and go to state 8
+    ELSE            shift and go to state 9
+    VAR             shift and go to state 10
+    TAG             shift and go to state 12
+    CLASS           shift and go to state 13
+    ID              shift and go to state 14
 
+    linha_normal                   shift and go to state 28
+    linha_codigo                   shift and go to state 29
+    linha_var                      shift and go to state 30
+    linha_textplain                shift and go to state 31
+    corpo                          shift and go to state 7
+    tag                            shift and go to state 11
 
 state 16
 
-    (21) tag -> tag LPAREN . atributos RPAREN
-    (22) atributos -> . ATRIBUT
-    (23) atributos -> . ATRIBUT atributos
+    (16) linha_normal -> IDENTACAO corpo . COMA
+    (17) linha_normal -> IDENTACAO corpo .
 
-    ATRIBUT         shift and go to state 30
+    COMA            shift and go to state 33
+    NEWLINE         reduce using rule 17 (linha_normal -> IDENTACAO corpo .)
+    $end            reduce using rule 17 (linha_normal -> IDENTACAO corpo .)
 
-    atributos                      shift and go to state 29
 
 state 17
 
-    (18) tag -> TAG tag .
-    (21) tag -> tag . LPAREN atributos RPAREN
+    (12) linha_codigo -> IDENTACAO IF . TEXTO
 
-  ! shift/reduce conflict for LPAREN resolved as shift
-    SPACE           reduce using rule 18 (tag -> TAG tag .)
-    EQUAL           reduce using rule 18 (tag -> TAG tag .)
-    NEWLINE         reduce using rule 18 (tag -> TAG tag .)
-    IDENTACAO       reduce using rule 18 (tag -> TAG tag .)
-    $end            reduce using rule 18 (tag -> TAG tag .)
-    COMA            reduce using rule 18 (tag -> TAG tag .)
-    LPAREN          shift and go to state 16
-
-  ! LPAREN          [ reduce using rule 18 (tag -> TAG tag .) ]
+    TEXTO           shift and go to state 34
 
 
 state 18
 
-    (19) tag -> CLASS tag .
-    (21) tag -> tag . LPAREN atributos RPAREN
+    (14) linha_codigo -> IDENTACAO ELSE .
 
-  ! shift/reduce conflict for LPAREN resolved as shift
-    SPACE           reduce using rule 19 (tag -> CLASS tag .)
-    EQUAL           reduce using rule 19 (tag -> CLASS tag .)
-    NEWLINE         reduce using rule 19 (tag -> CLASS tag .)
-    IDENTACAO       reduce using rule 19 (tag -> CLASS tag .)
-    $end            reduce using rule 19 (tag -> CLASS tag .)
-    COMA            reduce using rule 19 (tag -> CLASS tag .)
-    LPAREN          shift and go to state 16
-
-  ! LPAREN          [ reduce using rule 19 (tag -> CLASS tag .) ]
+    NEWLINE         reduce using rule 14 (linha_codigo -> IDENTACAO ELSE .)
+    $end            reduce using rule 14 (linha_codigo -> IDENTACAO ELSE .)
 
 
 state 19
 
-    (20) tag -> ID tag .
-    (21) tag -> tag . LPAREN atributos RPAREN
+    (10) linha_var -> IDENTACAO VAR . TEXTO EQUAL TEXTO
 
-  ! shift/reduce conflict for LPAREN resolved as shift
-    SPACE           reduce using rule 20 (tag -> ID tag .)
-    EQUAL           reduce using rule 20 (tag -> ID tag .)
-    NEWLINE         reduce using rule 20 (tag -> ID tag .)
-    IDENTACAO       reduce using rule 20 (tag -> ID tag .)
-    $end            reduce using rule 20 (tag -> ID tag .)
-    COMA            reduce using rule 20 (tag -> ID tag .)
-    LPAREN          shift and go to state 16
-
-  ! LPAREN          [ reduce using rule 20 (tag -> ID tag .) ]
+    TEXTO           shift and go to state 35
 
 
 state 20
 
-    (2) html -> html codigo linhas .
-    (5) linhas -> linhas . NEWLINE linha_normal
-    (7) linhas -> linhas . NEWLINE linha_textplain
+    (13) linha_codigo -> IF TEXTO .
 
-    IDENTACAO       reduce using rule 2 (html -> html codigo linhas .)
-    $end            reduce using rule 2 (html -> html codigo linhas .)
-    NEWLINE         shift and go to state 12
+    NEWLINE         reduce using rule 13 (linha_codigo -> IF TEXTO .)
+    $end            reduce using rule 13 (linha_codigo -> IF TEXTO .)
 
 
 state 21
 
-    (3) codigo -> IDENTACAO IF . TEXTO NEWLINE
+    (11) linha_var -> VAR TEXTO . EQUAL TEXTO
 
-    TEXTO           shift and go to state 31
+    EQUAL           shift and go to state 36
 
 
 state 22
 
-    (4) codigo -> IDENTACAO ELSE .
+    (21) corpo -> tag SPACE . TEXTO
 
-    IDENTACAO       reduce using rule 4 (codigo -> IDENTACAO ELSE .)
-    TAG             reduce using rule 4 (codigo -> IDENTACAO ELSE .)
-    CLASS           reduce using rule 4 (codigo -> IDENTACAO ELSE .)
-    ID              reduce using rule 4 (codigo -> IDENTACAO ELSE .)
+    TEXTO           shift and go to state 37
 
 
 state 23
 
-    (5) linhas -> linhas NEWLINE linha_normal .
+    (22) corpo -> tag EQUAL . SPACE TEXTO
 
-    NEWLINE         reduce using rule 5 (linhas -> linhas NEWLINE linha_normal .)
-    IDENTACAO       reduce using rule 5 (linhas -> linhas NEWLINE linha_normal .)
-    $end            reduce using rule 5 (linhas -> linhas NEWLINE linha_normal .)
+    SPACE           shift and go to state 38
 
 
 state 24
 
-    (7) linhas -> linhas NEWLINE linha_textplain .
+    (29) tag -> tag LPAREN . atributos RPAREN
+    (30) atributos -> . ATRIBUT
+    (31) atributos -> . ATRIBUT atributos
 
-    NEWLINE         reduce using rule 7 (linhas -> linhas NEWLINE linha_textplain .)
-    IDENTACAO       reduce using rule 7 (linhas -> linhas NEWLINE linha_textplain .)
-    $end            reduce using rule 7 (linhas -> linhas NEWLINE linha_textplain .)
+    ATRIBUT         shift and go to state 40
 
+    atributos                      shift and go to state 39
 
 state 25
 
-    (8) linha_normal -> IDENTACAO . corpo COMA
-    (9) linha_normal -> IDENTACAO . corpo
-    (11) linha_textplain -> IDENTACAO . TEXTPLAIN
-    (12) corpo -> . tag
-    (13) corpo -> . tag SPACE TEXTO
-    (14) corpo -> . tag EQUAL SPACE TEXTO
-    (15) tag -> . TAG
-    (16) tag -> . CLASS
-    (17) tag -> . ID
-    (18) tag -> . TAG tag
-    (19) tag -> . CLASS tag
-    (20) tag -> . ID tag
-    (21) tag -> . tag LPAREN atributos RPAREN
+    (26) tag -> TAG tag .
+    (29) tag -> tag . LPAREN atributos RPAREN
 
-    TEXTPLAIN       shift and go to state 32
-    TAG             shift and go to state 7
-    CLASS           shift and go to state 8
-    ID              shift and go to state 9
+  ! shift/reduce conflict for LPAREN resolved as shift
+    SPACE           reduce using rule 26 (tag -> TAG tag .)
+    EQUAL           reduce using rule 26 (tag -> TAG tag .)
+    NEWLINE         reduce using rule 26 (tag -> TAG tag .)
+    $end            reduce using rule 26 (tag -> TAG tag .)
+    COMA            reduce using rule 26 (tag -> TAG tag .)
+    LPAREN          shift and go to state 24
 
-    corpo                          shift and go to state 13
-    tag                            shift and go to state 6
+  ! LPAREN          [ reduce using rule 26 (tag -> TAG tag .) ]
+
 
 state 26
 
-    (8) linha_normal -> IDENTACAO corpo COMA .
+    (27) tag -> CLASS tag .
+    (29) tag -> tag . LPAREN atributos RPAREN
 
-    NEWLINE         reduce using rule 8 (linha_normal -> IDENTACAO corpo COMA .)
-    IDENTACAO       reduce using rule 8 (linha_normal -> IDENTACAO corpo COMA .)
-    $end            reduce using rule 8 (linha_normal -> IDENTACAO corpo COMA .)
+  ! shift/reduce conflict for LPAREN resolved as shift
+    SPACE           reduce using rule 27 (tag -> CLASS tag .)
+    EQUAL           reduce using rule 27 (tag -> CLASS tag .)
+    NEWLINE         reduce using rule 27 (tag -> CLASS tag .)
+    $end            reduce using rule 27 (tag -> CLASS tag .)
+    COMA            reduce using rule 27 (tag -> CLASS tag .)
+    LPAREN          shift and go to state 24
+
+  ! LPAREN          [ reduce using rule 27 (tag -> CLASS tag .) ]
 
 
 state 27
 
-    (13) corpo -> tag SPACE TEXTO .
+    (28) tag -> ID tag .
+    (29) tag -> tag . LPAREN atributos RPAREN
 
-    NEWLINE         reduce using rule 13 (corpo -> tag SPACE TEXTO .)
-    IDENTACAO       reduce using rule 13 (corpo -> tag SPACE TEXTO .)
-    $end            reduce using rule 13 (corpo -> tag SPACE TEXTO .)
-    COMA            reduce using rule 13 (corpo -> tag SPACE TEXTO .)
+  ! shift/reduce conflict for LPAREN resolved as shift
+    SPACE           reduce using rule 28 (tag -> ID tag .)
+    EQUAL           reduce using rule 28 (tag -> ID tag .)
+    NEWLINE         reduce using rule 28 (tag -> ID tag .)
+    $end            reduce using rule 28 (tag -> ID tag .)
+    COMA            reduce using rule 28 (tag -> ID tag .)
+    LPAREN          shift and go to state 24
+
+  ! LPAREN          [ reduce using rule 28 (tag -> ID tag .) ]
 
 
 state 28
 
-    (14) corpo -> tag EQUAL SPACE . TEXTO
+    (3) linhas -> linhas NEWLINE linha_normal .
 
-    TEXTO           shift and go to state 33
+    NEWLINE         reduce using rule 3 (linhas -> linhas NEWLINE linha_normal .)
+    $end            reduce using rule 3 (linhas -> linhas NEWLINE linha_normal .)
 
 
 state 29
 
-    (21) tag -> tag LPAREN atributos . RPAREN
+    (5) linhas -> linhas NEWLINE linha_codigo .
 
-    RPAREN          shift and go to state 34
+    NEWLINE         reduce using rule 5 (linhas -> linhas NEWLINE linha_codigo .)
+    $end            reduce using rule 5 (linhas -> linhas NEWLINE linha_codigo .)
 
 
 state 30
 
-    (22) atributos -> ATRIBUT .
-    (23) atributos -> ATRIBUT . atributos
-    (22) atributos -> . ATRIBUT
-    (23) atributos -> . ATRIBUT atributos
+    (7) linhas -> linhas NEWLINE linha_var .
 
-    RPAREN          reduce using rule 22 (atributos -> ATRIBUT .)
-    ATRIBUT         shift and go to state 30
+    NEWLINE         reduce using rule 7 (linhas -> linhas NEWLINE linha_var .)
+    $end            reduce using rule 7 (linhas -> linhas NEWLINE linha_var .)
 
-    atributos                      shift and go to state 35
 
 state 31
 
-    (3) codigo -> IDENTACAO IF TEXTO . NEWLINE
+    (9) linhas -> linhas NEWLINE linha_textplain .
 
-    NEWLINE         shift and go to state 36
+    NEWLINE         reduce using rule 9 (linhas -> linhas NEWLINE linha_textplain .)
+    $end            reduce using rule 9 (linhas -> linhas NEWLINE linha_textplain .)
 
 
 state 32
 
-    (11) linha_textplain -> IDENTACAO TEXTPLAIN .
+    (16) linha_normal -> IDENTACAO . corpo COMA
+    (17) linha_normal -> IDENTACAO . corpo
+    (12) linha_codigo -> IDENTACAO . IF TEXTO
+    (14) linha_codigo -> IDENTACAO . ELSE
+    (10) linha_var -> IDENTACAO . VAR TEXTO EQUAL TEXTO
+    (19) linha_textplain -> IDENTACAO . TEXTPLAIN
+    (20) corpo -> . tag
+    (21) corpo -> . tag SPACE TEXTO
+    (22) corpo -> . tag EQUAL SPACE TEXTO
+    (23) tag -> . TAG
+    (24) tag -> . CLASS
+    (25) tag -> . ID
+    (26) tag -> . TAG tag
+    (27) tag -> . CLASS tag
+    (28) tag -> . ID tag
+    (29) tag -> . tag LPAREN atributos RPAREN
 
-    NEWLINE         reduce using rule 11 (linha_textplain -> IDENTACAO TEXTPLAIN .)
-    IDENTACAO       reduce using rule 11 (linha_textplain -> IDENTACAO TEXTPLAIN .)
-    $end            reduce using rule 11 (linha_textplain -> IDENTACAO TEXTPLAIN .)
+    IF              shift and go to state 17
+    ELSE            shift and go to state 18
+    VAR             shift and go to state 19
+    TEXTPLAIN       shift and go to state 41
+    TAG             shift and go to state 12
+    CLASS           shift and go to state 13
+    ID              shift and go to state 14
 
+    corpo                          shift and go to state 16
+    tag                            shift and go to state 11
 
 state 33
 
-    (14) corpo -> tag EQUAL SPACE TEXTO .
+    (16) linha_normal -> IDENTACAO corpo COMA .
 
-    NEWLINE         reduce using rule 14 (corpo -> tag EQUAL SPACE TEXTO .)
-    IDENTACAO       reduce using rule 14 (corpo -> tag EQUAL SPACE TEXTO .)
-    $end            reduce using rule 14 (corpo -> tag EQUAL SPACE TEXTO .)
-    COMA            reduce using rule 14 (corpo -> tag EQUAL SPACE TEXTO .)
+    NEWLINE         reduce using rule 16 (linha_normal -> IDENTACAO corpo COMA .)
+    $end            reduce using rule 16 (linha_normal -> IDENTACAO corpo COMA .)
 
 
 state 34
 
-    (21) tag -> tag LPAREN atributos RPAREN .
+    (12) linha_codigo -> IDENTACAO IF TEXTO .
 
-    SPACE           reduce using rule 21 (tag -> tag LPAREN atributos RPAREN .)
-    EQUAL           reduce using rule 21 (tag -> tag LPAREN atributos RPAREN .)
-    LPAREN          reduce using rule 21 (tag -> tag LPAREN atributos RPAREN .)
-    NEWLINE         reduce using rule 21 (tag -> tag LPAREN atributos RPAREN .)
-    IDENTACAO       reduce using rule 21 (tag -> tag LPAREN atributos RPAREN .)
-    $end            reduce using rule 21 (tag -> tag LPAREN atributos RPAREN .)
-    COMA            reduce using rule 21 (tag -> tag LPAREN atributos RPAREN .)
+    NEWLINE         reduce using rule 12 (linha_codigo -> IDENTACAO IF TEXTO .)
+    $end            reduce using rule 12 (linha_codigo -> IDENTACAO IF TEXTO .)
 
 
 state 35
 
-    (23) atributos -> ATRIBUT atributos .
+    (10) linha_var -> IDENTACAO VAR TEXTO . EQUAL TEXTO
 
-    RPAREN          reduce using rule 23 (atributos -> ATRIBUT atributos .)
+    EQUAL           shift and go to state 42
 
 
 state 36
 
-    (3) codigo -> IDENTACAO IF TEXTO NEWLINE .
+    (11) linha_var -> VAR TEXTO EQUAL . TEXTO
 
-    IDENTACAO       reduce using rule 3 (codigo -> IDENTACAO IF TEXTO NEWLINE .)
-    TAG             reduce using rule 3 (codigo -> IDENTACAO IF TEXTO NEWLINE .)
-    CLASS           reduce using rule 3 (codigo -> IDENTACAO IF TEXTO NEWLINE .)
-    ID              reduce using rule 3 (codigo -> IDENTACAO IF TEXTO NEWLINE .)
+    TEXTO           shift and go to state 43
+
+
+state 37
+
+    (21) corpo -> tag SPACE TEXTO .
+
+    NEWLINE         reduce using rule 21 (corpo -> tag SPACE TEXTO .)
+    $end            reduce using rule 21 (corpo -> tag SPACE TEXTO .)
+    COMA            reduce using rule 21 (corpo -> tag SPACE TEXTO .)
+
+
+state 38
+
+    (22) corpo -> tag EQUAL SPACE . TEXTO
+
+    TEXTO           shift and go to state 44
+
+
+state 39
+
+    (29) tag -> tag LPAREN atributos . RPAREN
+
+    RPAREN          shift and go to state 45
+
+
+state 40
+
+    (30) atributos -> ATRIBUT .
+    (31) atributos -> ATRIBUT . atributos
+    (30) atributos -> . ATRIBUT
+    (31) atributos -> . ATRIBUT atributos
+
+    RPAREN          reduce using rule 30 (atributos -> ATRIBUT .)
+    ATRIBUT         shift and go to state 40
+
+    atributos                      shift and go to state 46
+
+state 41
+
+    (19) linha_textplain -> IDENTACAO TEXTPLAIN .
+
+    NEWLINE         reduce using rule 19 (linha_textplain -> IDENTACAO TEXTPLAIN .)
+    $end            reduce using rule 19 (linha_textplain -> IDENTACAO TEXTPLAIN .)
+
+
+state 42
+
+    (10) linha_var -> IDENTACAO VAR TEXTO EQUAL . TEXTO
+
+    TEXTO           shift and go to state 47
+
+
+state 43
+
+    (11) linha_var -> VAR TEXTO EQUAL TEXTO .
+
+    NEWLINE         reduce using rule 11 (linha_var -> VAR TEXTO EQUAL TEXTO .)
+    $end            reduce using rule 11 (linha_var -> VAR TEXTO EQUAL TEXTO .)
+
+
+state 44
+
+    (22) corpo -> tag EQUAL SPACE TEXTO .
+
+    NEWLINE         reduce using rule 22 (corpo -> tag EQUAL SPACE TEXTO .)
+    $end            reduce using rule 22 (corpo -> tag EQUAL SPACE TEXTO .)
+    COMA            reduce using rule 22 (corpo -> tag EQUAL SPACE TEXTO .)
+
+
+state 45
+
+    (29) tag -> tag LPAREN atributos RPAREN .
+
+    SPACE           reduce using rule 29 (tag -> tag LPAREN atributos RPAREN .)
+    EQUAL           reduce using rule 29 (tag -> tag LPAREN atributos RPAREN .)
+    LPAREN          reduce using rule 29 (tag -> tag LPAREN atributos RPAREN .)
+    NEWLINE         reduce using rule 29 (tag -> tag LPAREN atributos RPAREN .)
+    $end            reduce using rule 29 (tag -> tag LPAREN atributos RPAREN .)
+    COMA            reduce using rule 29 (tag -> tag LPAREN atributos RPAREN .)
+
+
+state 46
+
+    (31) atributos -> ATRIBUT atributos .
+
+    RPAREN          reduce using rule 31 (atributos -> ATRIBUT atributos .)
+
+
+state 47
+
+    (10) linha_var -> IDENTACAO VAR TEXTO EQUAL TEXTO .
+
+    NEWLINE         reduce using rule 10 (linha_var -> IDENTACAO VAR TEXTO EQUAL TEXTO .)
+    $end            reduce using rule 10 (linha_var -> IDENTACAO VAR TEXTO EQUAL TEXTO .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for LPAREN in state 17 resolved as shift
-WARNING: shift/reduce conflict for LPAREN in state 18 resolved as shift
-WARNING: shift/reduce conflict for LPAREN in state 19 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 25 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 26 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 27 resolved as shift
