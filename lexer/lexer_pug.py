@@ -35,7 +35,7 @@ tokens = (
     'VAR'
 )
 def t_INITIAL_VAR(t):
-    r'\-'
+    r'\-\ var'
     t.lexer.begin('variaveis')
     return t
 

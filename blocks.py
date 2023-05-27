@@ -1,3 +1,13 @@
+class Blocks:
+    def __init__(self):
+        self.sub_blocks = []
+        self.vars = {}
+
+    def html(self):
+        html=''
+        for b in self.sub_blocks:
+            html+=b.html()
+        return html
 
 class Block:
     def __init__(self,nivel_atual,info):

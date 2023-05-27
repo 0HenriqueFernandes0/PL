@@ -6,13 +6,12 @@ html(lang="en")
 	body
         h1 Pug - node template engine
         #container.col
-            -youAreUsingPug = False
+            - var youAreUsingPug = true
             if youAreUsingPug
                 p.
-                    You are amazing
-                    You are amazing
+                    You are amazing 
             else
-                p Get on it!
+                .oi Get on it!
             p.
                 Pug is a terse and simple templating language with a
                 strong focus 
