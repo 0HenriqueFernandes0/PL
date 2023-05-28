@@ -12,7 +12,7 @@ def t_textplain_IDENTACAO(t):
         elif char=="\t":
             nivel+=4
     t.value = nivel
-    if(t.lexer.nivel>t.value):
+    if(t.lexer.nivel>=t.value):
         t.lexer.begin('INITIAL')
     return t
 

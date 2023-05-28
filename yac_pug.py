@@ -24,13 +24,21 @@ def p_linhas(p):
     if len(p)==4:
         next = p[1].sub_blocks
         if len (next)>0:
-            if type(p[3]) == Block or type(p[3]) == Code:
+            if (type(p[3]) == tuple and type(p[3][0]) ==Block ) or type(p[3]) == Code:
 
                 if type(p[3]) == Code and type(p[3].bol) == str:
                     if p[3].bol in p[1].vars:
                         p[3].bol=p[1].vars[p[3].bol]
                     else:
                         p[3].bol= False
+                elif type(p[3]) == tuple and p[3][1]==0:
+                    if p[3][0].texto in p[1].vars:
+                        p[3][0].texto = p[1].vars[p[3][0].texto]
+                    else:
+                        p[3][0].texto = ''
+                    p[3]=p[3][0]
+                elif type(p[3]) == tuple:
+                    p[3]=p[3][0]
 
                 while len(next[-1].sub_blocks)>0 and next[-1].nivel_seguinte!= -1 and next[-1].nivel_seguinte < p[3].nivel_atual:
                     next = next[-1].sub_blocks
@@ -53,14 +61,14 @@ def p_linhas(p):
                 p[1].vars[p[3][0]]=p[3][1]
             
             p[0]=p[1]
-    elif len(p)==2 and type(p[1]) == Block:
+    elif len(p)==2 and type(p[1]) == tuple and type(p[1][0]) == Block:
         p[0]=Blocks()
-        p[0].sub_blocks.append(p[1])
+        p[0].sub_blocks.append(p[1][0])
     elif len(p)==2 and type(p[1]) == Code:
         p[0]=Blocks()
         p[1].bol=False
         p[0].sub_blocks.append(p[1])
-    elif len(p)==2 and type(p[1]) is tuple:
+    elif len(p)==2 and type(p[1]) == tuple:
         p[0]=Blocks()
         p[0].vars[p[1][0]]=p[1][1]
 
@@ -118,7 +126,7 @@ def p_linha_normal(p):
     else:
         info=p[1]
 
-    p[0]=Block(nivel,info)
+    p[0]=(Block(nivel,(info[0],info[1])),info[2])
 
 def p_linha_textplain(p):
     'linha_textplain : IDENTACAO TEXTPLAIN '
@@ -130,11 +138,11 @@ def p_corpo(p):
                 | tag EQUAL SPACE TEXTO
     '''
     if (len(p)==2):
-        p[0]=(p[1],'')
+        p[0]=(p[1],'',1)
     elif(len(p)==4):
-        p[0]=(p[1],p[3])
+        p[0]=(p[1],p[3],1)
     elif(len(p)==5):
-        p[0]=(p[1],'')
+        p[0]=(p[1],p[4],0)
 
 def p_tag(p):
     '''tag :    TAG

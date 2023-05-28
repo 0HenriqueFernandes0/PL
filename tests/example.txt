@@ -3,6 +3,8 @@ html(lang="en")
         title= pageTitle
         script(type='text/javascript').
             if (foo) bar(1 + 5)
+        - var pageTitle = TP_PL
+        subtitle= pageTitle
 	body
         h1 Pug - node template engine
         #container.col
