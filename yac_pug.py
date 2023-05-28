@@ -6,11 +6,8 @@ vars = {}
 
 def p_html(p):
     '''html :   linhas
-                | 
     '''
-    p[0]=''
-    if len(p)==2:
-        p[0]+=p[1].html()
+    p[0]=p[1].html()
         
 def p_linhas(p):
     '''linhas : linhas NEWLINE linha_normal
