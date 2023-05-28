@@ -158,7 +158,7 @@ def p_tag(p):
         else:
             p[0]=(p[2],p[1][1],p[1][2],p[1][3]+p[3])
     else:
-        p[0]=('','','','')
+        p[0]=('','','',[])
 
 def p_atributos_linha(p):
     '''atributos_linha :  LPAREN atributos RPAREN
