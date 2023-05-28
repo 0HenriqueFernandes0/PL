@@ -31,7 +31,6 @@ tokens = (
     'COMA',
     'IF',
     'ELSE',
-    'FOR',
     'VAR'
 )
 def t_INITIAL_VAR(t):
