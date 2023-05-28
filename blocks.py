@@ -72,11 +72,10 @@ class Block:
         return node
     
 class Code:
-    def __init__(self,nivel_atual,bol,number,type):
+    def __init__(self,nivel_atual,bol,type):
         self.nivel_atual = nivel_atual
         self.nivel_seguinte = -1
         self.bol=bol
-        self.number=number
         self.type=type
         self.sub_blocks = []
 
@@ -94,7 +93,6 @@ class Code:
     def html(self):
         node = ''
         if self.bol:
-            for i in range(self.number):
                 if len(self.sub_blocks)>0:
                     for b in self.sub_blocks:
                         node+="\n"+ b.html()

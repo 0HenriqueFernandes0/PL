@@ -98,14 +98,14 @@ def p_linha_codigo(p):
     '''
     if len(p)==4:
         if p[2] == "if": 
-            p[0]=Code(p[1],p[3],1,'if')
+            p[0]=Code(p[1],p[3],'if')
     elif len(p)==3:
         if p[1] == "if": 
-            p[0]=Code(0,p[2],1,'if')
+            p[0]=Code(0,p[2],'if')
         else:
-            p[0]=Code(p[1],None,1,'else')
+            p[0]=Code(p[1],None,'else')
     else:
-        p[0]=Code(0,None,1,'else')
+        p[0]=Code(0,None,'else')
 
 def p_linha_normal(p):
     '''linha_normal :  IDENTACAO corpo COMA
