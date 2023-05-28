@@ -20,8 +20,7 @@ def p_linhas(p):
     '''
     if len(p)==4:
         next = p[1].sub_blocks
-        if len (next)>0:
-            if (type(p[3]) == tuple and type(p[3][0]) ==Block ) or type(p[3]) == Code:
+        if (type(p[3]) == tuple and type(p[3][0]) ==Block ) or type(p[3]) == Code:
 
                 if type(p[3]) == Code and type(p[3].bol) == str:
                     if p[3].bol in p[1].vars:
@@ -48,16 +47,16 @@ def p_linhas(p):
                 elif next[0].nivel_atual == p[3].nivel_atual:
                     next.append(p[3])
 
-            elif type(p[3]) is str:
-                next=next[-1]
-                while len(next.sub_blocks)>0:
-                    next = next.sub_blocks[-1]
-                next.texto+=p[3]
+        elif type(p[3]) is str:
+            next=next[-1]
+            while len(next.sub_blocks)>0:
+                next = next.sub_blocks[-1]
+            next.texto+=p[3]
 
-            elif type(p[3]) is tuple:
-                p[1].vars[p[3][0]]=p[3][1]
+        elif type(p[3]) is tuple:
+            p[1].vars[p[3][0]]=p[3][1]
             
-            p[0]=p[1]
+        p[0]=p[1]
     elif len(p)==2 and type(p[1]) == tuple and type(p[1][0]) == Block:
         p[0]=Blocks()
         p[0].sub_blocks.append(p[1][0])
@@ -131,10 +130,11 @@ def p_linha_textplain(p):
 
 def p_corpo(p):
     '''corpo :  tag
+                | tag SPACE
                 | tag SPACE TEXTO
                 | tag EQUAL SPACE TEXTO
     '''
-    if (len(p)==2):
+    if (len(p)==2 or len(p)==3):
         p[0]=(p[1],'',1)
     elif(len(p)==4):
         p[0]=(p[1],p[3],1)
