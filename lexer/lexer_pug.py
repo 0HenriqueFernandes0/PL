@@ -3,7 +3,6 @@ from lexer.lexer_tag import*
 from lexer.lexer_atributos import*
 from lexer.lexer_frase import*
 from lexer.lexer_textplain import*
-from lexer.lexer_code import*
 from lexer.lexer_variaveis import*
 
 states = (
@@ -11,7 +10,6 @@ states = (
     ('tag', 'exclusive'),
     ('frase', 'exclusive'),
     ('textplain', 'exclusive'),
-    ('code', 'exclusive'),
     ('variaveis', 'exclusive')
 )
 
@@ -39,7 +37,7 @@ def t_INITIAL_VAR(t):
     return t
 
 def t_INITIAL_IF(t):
-    r'if(\ )*'
+    r'if(\ )+'
     t.value="if"
     t.lexer.begin('frase')
     return t
@@ -47,11 +45,6 @@ def t_INITIAL_IF(t):
 def t_INITIAL_ELSE(t):
     r'else'
     t.lexer.begin('frase')
-    return t
-
-def t_INITIAL_FOR(t):
-    r'for'
-    t.lexer.begin('code')
     return t
 
 def t_INITIAL_TAG(t):
